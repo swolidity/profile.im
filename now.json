@@ -1,6 +1,7 @@
 {
   "version": 2,
   "name": "profile.im",
+  "alias": "profile.im",
   "builds": [
     { "src": "www/package.json", "use": "@now/next" },
     { "src": "api/*.js", "use": "@now/node" }
