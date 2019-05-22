@@ -9,7 +9,7 @@ module.exports = function getDb(fn) {
     console.log("[mongo] client discard");
   }
   if (client === null) {
-    client = new MongoClient(process.env.MONGODB_URI);
+    client = new MongoClient(process.env.MONGO_URL, { useNewUrlParser: true });
     console.log("[mongo] client init");
   } else if (client.isConnected) {
     console.log("[mongo] client connected, quick return");

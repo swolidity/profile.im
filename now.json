@@ -3,17 +3,20 @@
   "name": "profile.im",
   "alias": "profile.im",
   "builds": [
-    { "src": "www/package.json", "use": "@now/next" },
-    { "src": "api/src/*.js", "use": "@now/node" }
+    { "src": "api/routes/**/*.js", "use": "@now/node" },
+    { "src": "www/package.json", "use": "@now/next" }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/src/$1"
+      "dest": "/api/routes/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/www/$1"
+      "dest": "/www/$1",
+      "headers": {
+        "x-request-path": "$1"
+      }
     }
   ]
 }

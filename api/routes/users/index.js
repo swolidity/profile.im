@@ -1,4 +1,3 @@
-require("now-env");
 const express = require("express");
 const helmet = require("helmet");
 const app = express();
@@ -12,7 +11,9 @@ app.use(json());
 app.get("*", async (req, res) => {
   const db = await mongo();
   const usersCollection = await db.collection("users");
-  const users = usersCollection.find();
+  const users = await usersCollection.find().toArray();
+
+  console.log(users);
 
   res.send(users);
 });
