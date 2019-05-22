@@ -4,12 +4,12 @@
   "alias": "profile.im",
   "builds": [
     { "src": "www/package.json", "use": "@now/next" },
-    { "src": "api/*.js", "use": "@now/node" }
+    { "src": "api/src/*.js", "use": "@now/node" }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/api/src/$1"
     },
     {
       "src": "/(.*)",
