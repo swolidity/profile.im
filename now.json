@@ -13,10 +13,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/www/$1",
-      "headers": {
-        "x-request-path": "$1"
-      }
+      "dest": "/www/$1"
     }
   ]
 }
