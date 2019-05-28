@@ -8,11 +8,15 @@
   ],
   "routes": [
     {
+      "src": "/api/user_profile/(?<username>[^/]+)$",
+      "dest": "/api/routes/user_profile/index.js?username=$username"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/routes/$1"
     },
     { "src": "/privacy", "dest": "/www/privacy" },
     { "src": "/", "dest": "/www/index" },
-    { "src": "/(?<username>[^/]+)$", "dest": "/www/index?username=$username" }
+    { "src": "/(?<username>[^/]+)$", "dest": "/www/users?username=$username" }
   ]
 }
