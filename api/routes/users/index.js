@@ -13,8 +13,6 @@ app.get("*", async (req, res) => {
   const usersCollection = await db.collection("users");
   const users = await usersCollection.find().toArray();
 
-  console.log(users);
-
   res.send(users);
 });
 
