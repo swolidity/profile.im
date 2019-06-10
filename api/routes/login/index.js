@@ -11,13 +11,9 @@ app.use(json());
 app.get("*", async (req, res) => {
   const db = await mongo();
   const usersCollection = await db.collection("users");
-  const user = await usersCollection.findOne({ username: req.query.username });
+  const users = await usersCollection.find().toArray();
 
-  const answersCollection = await db.collection("answers");
-
-  const answers = await answersCollection.find({ user_id: user._id }).toArray();
-
-  res.send({ user, answers });
+  res.send(users);
 });
 
 module.exports = app;
