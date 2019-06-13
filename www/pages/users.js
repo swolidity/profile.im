@@ -2,7 +2,8 @@ import "isomorphic-unfetch";
 
 const Users = ({ user, answers }) => (
   <div>
-    User: {user.username}
+    <div>User: {user.username}</div>
+    <div>views: {user.profile_views}</div>
     <ul>
       {answers.map(answer => (
         <li>

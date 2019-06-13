@@ -13,6 +13,19 @@ app.get("*", async (req, res) => {
   const usersCollection = await db.collection("users");
   const user = await usersCollection.findOne({ username: req.query.username });
 
+  if (!user) {
+    return res.status("404").send("User not found");
+  }
+
+  usersCollection.update(
+    { _id: user._id },
+    {
+      $inc: { profile_views: 1 },
+      $set: { _id: user._id }
+    },
+    { upsert: true }
+  );
+
   const answersCollection = await db.collection("answers");
 
   const answers = await answersCollection.find({ user_id: user._id }).toArray();
