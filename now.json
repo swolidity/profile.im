@@ -15,8 +15,7 @@
       "src": "/api/(.*)",
       "dest": "/api/routes/$1"
     },
-    { "src": "/privacy", "dest": "/www/privacy" },
-    { "src": "/", "dest": "/www/index" },
-    { "src": "/(?<username>[^/]+)$", "dest": "/www/users?username=$username" }
+    { "src": "/(?<username>[^/]+)$", "dest": "/www/users?username=$username" },
+    { "src": "/(.*)", "dest": "/www/$1" }
   ]
 }

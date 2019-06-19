@@ -12,15 +12,16 @@ const Index = ({ users }) => (
       fields="name,email,picture"
       callback={responseFacebook}
       redirectUri="http://profile.im/login"
-      render={renderProps => (
-        <button onClick={renderProps.onClick}>Login with Facebook</button>
-      )}
+      render={renderProps =>
+        <button onClick={renderProps.onClick}>Login with Facebook</button> ||
+        console.log("Andy")
+      }
     />
 
     <div>{users.length} profiles made!</div>
 
     {users.map(user => (
-      <div>{user.username}</div>
+      <div key={user._id}>{user.username}</div>
     ))}
   </div>
 );
