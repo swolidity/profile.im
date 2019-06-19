@@ -12,6 +12,7 @@ const Index = ({ users }) => (
       fields="name,email,picture"
       callback={responseFacebook}
       redirectUri="http://profile.im/login"
+      isMobile={true}
       render={renderProps =>
         <button onClick={renderProps.onClick}>Login with Facebook</button> ||
         console.log("Andy")
