@@ -4,16 +4,14 @@ const Users = ({ user, answers }) => (
   <div>
     <div>User: {user.username}</div>
     <div>views: {user.profile_views}</div>
-    <ul>
-      {answers.map(answer => (
-        <li>
-          {answer.title}:{" "}
-          <a href={answer.link} target="_blank">
-            {answer.answer}
-          </a>
-        </li>
-      ))}
-    </ul>
+    {answers.map(answer => (
+      <div key={answer._id}>
+        {answer.title}:{" "}
+        <a href={answer.link} target="_blank">
+          {answer.answer}
+        </a>
+      </div>
+    ))}
   </div>
 );
 
