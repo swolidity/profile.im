@@ -2,6 +2,9 @@ import "isomorphic-unfetch";
 
 const Users = ({ user, answers }) => (
   <div>
+    <div>
+      <img src={user.picture} alt={user.name} />
+    </div>
     <div>User: {user.username}</div>
     <div>views: {user.profile_views}</div>
     {answers.map(answer => (

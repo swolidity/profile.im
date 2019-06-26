@@ -24,7 +24,9 @@ passport.use(
           $set: {
             facebook_id: profile.id,
             name: profile.name,
-            picture: profile.picture.data.url,
+            picture: `https://graph.facebook.com/${
+              profile.id
+            }/picture?type=large`,
             email: profile.email
           }
         },
