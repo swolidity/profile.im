@@ -2,6 +2,11 @@
   "version": 2,
   "name": "profile.im",
   "alias": "profile.im",
+  "env": {
+    "API_URL": "https://profile.im/api",
+    "FACEBOOK_APP_ID": "2815966931762706",
+    "FACEBOOK_APP_SECRET": "@facebook-app-secret"
+  },
   "builds": [
     { "src": "api/routes/**/*.js", "use": "@now/node" },
     { "src": "www/package.json", "use": "@now/next" }
@@ -15,6 +20,7 @@
       "src": "/api/(.*)",
       "dest": "/api/routes/$1"
     },
+    { "src": "/login", "dest": "/www/login" },
     { "src": "/(?<username>[^/]+)$", "dest": "/www/users?username=$username" },
     { "src": "/(.*)", "dest": "/www/$1" }
   ]

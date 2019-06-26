@@ -8,15 +8,14 @@ const responseFacebook = response => {
 const Index = ({ users }) => (
   <div>
     <FacebookLogin
-      appId="2815966931762706"
+      appId={process.env.FACEBOOK_APP_ID}
       fields="name,email,picture"
       callback={responseFacebook}
-      redirectUri="https://profile.im/login"
+      redirectUri={`${process.env.API_URL}/login`}
       isMobile={true}
-      render={renderProps =>
-        <button onClick={renderProps.onClick}>Login with Facebook</button> ||
-        console.log("Andy")
-      }
+      render={renderProps => (
+        <button onClick={renderProps.onClick}>Login with Facebook</button>
+      )}
     />
 
     <div>{users.length} profiles made!</div>

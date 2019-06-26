@@ -10,7 +10,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "http://localhost:3000/api/login"
+      callbackURL: `${process.env.API_URL}/login`
     },
     function(accessToken, refreshToken, profile, cb) {
       return cb(null, profile);
@@ -23,6 +23,14 @@ app.use(helmet());
 app.use(require("body-parser").urlencoded({ extended: true }));
 app.use(passport.initialize());
 
-app.get("*", passport.authenticate("facebook", { session: false }));
+app.get(
+  "*",
+  passport.authenticate("facebook", {
+    session: false
+  }),
+  (req, res) => {
+    res.send(req.user);
+  }
+);
 
 module.exports = app;
