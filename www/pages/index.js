@@ -1,16 +1,11 @@
 import "isomorphic-unfetch";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
-const responseFacebook = response => {
-  console.log(response);
-};
-
 const Index = ({ users }) => (
   <div>
     <FacebookLogin
       appId={process.env.FACEBOOK_APP_ID}
       fields="name,email,picture"
-      callback={responseFacebook}
       redirectUri={`${process.env.API_URL}/login`}
       isMobile={true}
       render={renderProps => (

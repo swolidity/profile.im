@@ -1,8 +1,6 @@
 import "isomorphic-unfetch";
 
 const Index = ({ user }) => {
-  console.log("user", user);
-
   return <div>login</div>;
 };
 

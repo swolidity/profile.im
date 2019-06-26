@@ -14,7 +14,6 @@ passport.use(
       profileFields: ["id", "displayName", "picture", "email"]
     },
     async (accessToken, refreshToken, { _json: profile }, cb) => {
-      console.log("PROFILEY", profile);
       const db = await mongo();
       const usersCollection = await db.collection("users");
 
