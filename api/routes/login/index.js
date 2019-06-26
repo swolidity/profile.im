@@ -12,8 +12,25 @@ passport.use(
       clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: `${process.env.API_URL}/login`
     },
-    function(accessToken, refreshToken, profile, cb) {
-      return cb(null, profile);
+    async (accessToken, refreshToken, profile, cb) => {
+      const db = await mongo();
+      const usersCollection = await db.collection("users");
+
+      const { value: user } = await usersCollection.findOneAndUpdate(
+        { facebook_id: profile.id },
+        {
+          $setOnInsert: {
+            facebook_id: profile.id,
+            name: profile.displayName
+          }
+        },
+        {
+          returnNewDocument: true,
+          upsert: true
+        }
+      );
+
+      return cb(null, user);
     }
   )
 );
