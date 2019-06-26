@@ -10,18 +10,22 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: `${process.env.API_URL}/login`
+      callbackURL: `${process.env.API_URL}/login`,
+      profileFields: ["id", "displayName", "picture", "email"]
     },
-    async (accessToken, refreshToken, profile, cb) => {
+    async (accessToken, refreshToken, { _json: profile }, cb) => {
+      console.log("PROFILEY", profile);
       const db = await mongo();
       const usersCollection = await db.collection("users");
 
       const { value: user } = await usersCollection.findOneAndUpdate(
         { facebook_id: profile.id },
         {
-          $setOnInsert: {
+          $set: {
             facebook_id: profile.id,
-            name: profile.displayName
+            name: profile.name,
+            picture: profile.picture.data.url,
+            email: profile.email
           }
         },
         {
