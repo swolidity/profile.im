@@ -21,7 +21,9 @@ const Index = ({ users }) => (
     <div>{users.length} profiles made!</div>
 
     {users.map(user => (
-      <div key={user._id}>{user.username}</div>
+      <div key={user._id}>
+        <a href={`/${user.username}`}>{user.username}</a>
+      </div>
     ))}
   </div>
 );
