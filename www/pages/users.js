@@ -14,8 +14,8 @@ const Users = ({ user, answers }) => (
       </div>
 
       {answers.map(answer => (
-        <div key={answer._id}>
-          {answer.title}:{" "}
+        <div className="answer" key={answer._id}>
+          <div className="title">{answer.title}</div>
           <a href={answer.link} target="_blank">
             {answer.answer}
           </a>
@@ -47,6 +47,14 @@ const Users = ({ user, answers }) => (
           .bio {
             margin: 14px 0;
             font-size: 14px;
+          }
+          .answer {
+            margin-bottom: 18px;
+          }
+          .title {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 4px;
           }
         `}
       </style>
