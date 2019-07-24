@@ -28,7 +28,9 @@ app.get("*", async (req, res) => {
 
   const answersCollection = await db.collection("answers");
 
-  const answers = await answersCollection.find({ user_id: user._id }).toArray();
+  const answers = await answersCollection
+    .find({ user_id: user._id.toString() })
+    .toArray();
 
   res.send({ user, answers });
 });

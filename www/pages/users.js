@@ -1,5 +1,6 @@
 import "isomorphic-unfetch";
 import Layout from "../components/layout";
+import AddToProfile from "../components/AddToProfile";
 
 const Users = ({ user, answers }) => (
   <Layout>
@@ -12,6 +13,8 @@ const Users = ({ user, answers }) => (
           <div className="bio">{user.bio}</div>
         </div>
       </div>
+
+      <AddToProfile />
 
       {answers.map(answer => (
         <div className="answer" key={answer._id}>

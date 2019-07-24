@@ -4,6 +4,7 @@ const FacebookStrategy = require("passport-facebook").Strategy;
 const helmet = require("helmet");
 const app = express();
 const mongo = require("mongo");
+const jwt = require("jsonwebtoken");
 
 passport.use(
   new FacebookStrategy(
@@ -51,7 +52,11 @@ app.get(
     session: false
   }),
   (req, res) => {
-    res.send(req.user);
+    const user = req.user;
+    const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET);
+
+    res.cookie("jwt", token);
+    res.send({ user, token });
   }
 );
 
