@@ -3,10 +3,13 @@ import { createClient, TippleProvider } from "tipple";
 
 const client = createClient({ baseUrl: process.env.API_URL });
 
-export default ({ children }) => (
-  <div>
-    <Meta />
+const Layout = ({ children }) => {
+  return (
+    <div>
+      <Meta />
+      <TippleProvider client={client}>{children}</TippleProvider>
+    </div>
+  );
+};
 
-    <TippleProvider client={client}>{children}</TippleProvider>
-  </div>
-);
+export default Layout;
