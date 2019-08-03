@@ -16,9 +16,11 @@
     "express": "^4.17.0",
     "helmet": "^3.18.0",
     "jsonwebtoken": "^8.5.1",
+    "linkify-urls": "^3.1.0",
     "mongo": "./lib/mongo",
     "now-env": "^3.2.0",
     "passport": "^0.4.0",
-    "passport-facebook": "^3.0.0"
+    "passport-facebook": "^3.0.0",
+    "sanitize-html": "^1.20.1"
   }
 }

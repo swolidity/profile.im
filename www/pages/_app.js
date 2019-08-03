@@ -36,8 +36,6 @@ class MyApp extends App {
   render() {
     const { Component, pageProps, user } = this.props;
 
-    console.log("oo baby baby", user);
-
     return (
       <Container>
         <CurrentUserContext.Provider value={user}>

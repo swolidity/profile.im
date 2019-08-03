@@ -5,6 +5,8 @@ const json = require("body-parser").json;
 const mongo = require("mongo");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
+const sanitizeHtml = require("sanitize-html");
+const linkifyUrls = require("linkify-urls");
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -38,12 +40,19 @@ app.post(
       title: req.body.title
     });
 
+    const sanitizedAnswer = sanitizeHtml(linkifyUrls(req.body.item), {
+      allowedTags: ["a"],
+      allowedAttributes: {
+        a: ["href"]
+      }
+    });
+
     const answersCollection = await db.collection("answers");
     const answer = await answersCollection.insert({
       user_id: req.user.user_id,
       question_id: question.ops[0]._id,
       title: question.ops[0].title,
-      answer: req.body.item
+      answer: sanitizedAnswer
     });
 
     res.send(answer.ops[0]);
