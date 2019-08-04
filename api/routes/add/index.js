@@ -45,7 +45,7 @@ app.post(
     const firstUrl = [...getUrls(req.body.item)][0];
 
     const { body: meta } = await got(
-      `http://localhost:3000/api/meta?url=${firstUrl}`,
+      `${process.env.API_URL}/meta?url=${firstUrl}`,
       { json: true }
     );
 
