@@ -7,6 +7,8 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const sanitizeHtml = require("sanitize-html");
 const linkifyUrls = require("linkify-urls");
+const getUrls = require("get-urls");
+const got = require("got");
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -40,6 +42,13 @@ app.post(
       title: req.body.title
     });
 
+    const firstUrl = [...getUrls(req.body.item)][0];
+
+    const { body: meta } = await got(
+      `http://localhost:3000/api/meta?url=${firstUrl}`,
+      { json: true }
+    );
+
     const sanitizedAnswer = sanitizeHtml(linkifyUrls(req.body.item), {
       allowedTags: ["a"],
       allowedAttributes: {
@@ -52,7 +61,8 @@ app.post(
       user_id: req.user.user_id,
       question_id: question.ops[0]._id,
       title: question.ops[0].title,
-      answer: sanitizedAnswer
+      answer: sanitizedAnswer,
+      meta
     });
 
     res.send(answer.ops[0]);

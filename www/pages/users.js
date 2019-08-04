@@ -21,6 +21,10 @@ const Users = ({ user, answers }) => {
         {answers.map(answer => (
           <div className="answer" key={answer._id}>
             <div className="title">{answer.title}</div>
+            <div className="card">
+              <img src={answer.meta.image} alt={answer.meta.title} />
+              <div>{answer.meta.title}</div>
+            </div>
             <div dangerouslySetInnerHTML={{ __html: answer.answer }} />
           </div>
         ))}
