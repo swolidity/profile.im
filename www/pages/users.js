@@ -4,7 +4,6 @@ import AddToProfile from "../components/AddToProfile";
 import { useFetch } from "tipple";
 
 const Users = ({ user, answers }) => {
-  console.log(answers);
   return (
     <Layout>
       <div className="user-profile">
