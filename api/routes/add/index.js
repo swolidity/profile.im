@@ -9,6 +9,7 @@ const sanitizeHtml = require("sanitize-html");
 const linkifyUrls = require("linkify-urls");
 const got = require("got");
 const urlRegex = require("url-regex");
+const appendQuery = require("append-query");
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -62,7 +63,10 @@ app.post(
 
       meta = data;
 
-      console.log("metaaaaaa", meta);
+      // TODO: automatically add Amazon Affiliate ID
+      if (meta.publisher === "Amazon") {
+        meta.url = appendQuery(meta.url, { tag: "profiledotim-20" });
+      }
 
       removeCardUrl = item.replace(firstUrl, "");
       answerContent = linkifyUrls(removeCardUrl);
