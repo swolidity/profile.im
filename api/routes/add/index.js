@@ -47,16 +47,24 @@ app.post(
     let answerContent = item;
     let meta = null;
 
-    if (item.match(urlRegex())) {
+    if (!!item.match(urlRegex())) {
       const firstUrl = item.match(urlRegex())[0];
 
-      removeCardUrl = item.replace(firstUrl, "");
-
-      const { body: meta } = await got(
+      const { body: data } = await got(
         `${process.env.API_URL}/meta?url=${firstUrl}`,
-        { json: true }
+        {
+          json: true,
+          headers: {
+            "User-Agent": req.headers["user-agent"]
+          }
+        }
       );
 
+      meta = data;
+
+      console.log("metaaaaaa", meta);
+
+      removeCardUrl = item.replace(firstUrl, "");
       answerContent = linkifyUrls(removeCardUrl);
     }
 

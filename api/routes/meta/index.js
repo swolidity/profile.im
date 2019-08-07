@@ -33,8 +33,15 @@ app.get("*", async (req, res) => {
       .send("Please supply a URL to be scraped in the url query parameter.");
 
   let statusCode, data;
+
+  console.log("USER AGENT", req.headers["user-agent"]);
+
   try {
-    const { body: html } = await got(url);
+    const { body: html } = await got(url, {
+      headers: {
+        "User-Agent": req.headers["user-agent"]
+      }
+    });
     data = await metascraper({ url, html });
     statusCode = 200;
   } catch (err) {
