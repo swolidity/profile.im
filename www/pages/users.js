@@ -8,7 +8,7 @@ const Users = ({ user, answers }) => {
     <Layout>
       <div className="user-profile">
         <div className="profile-top">
-          <img src={user.picture} alt={user.name} />
+          <img className="profile-pic" src={user.picture} alt={user.name} />
           <div>
             <div className="username">{user.username}</div>
             <div className="views">{user.profile_views} views</div>
@@ -22,8 +22,10 @@ const Users = ({ user, answers }) => {
           <div className="answer" key={answer._id}>
             <div className="title">{answer.title}</div>
             <div className="card">
-              <img src={answer.meta.image} alt={answer.meta.title} />
-              <div>{answer.meta.title}</div>
+              <div className="image box">
+                <img src={answer.meta.image} alt={answer.meta.title} />
+              </div>
+              <div className="box">{answer.meta.title}</div>
             </div>
             <div dangerouslySetInnerHTML={{ __html: answer.answer }} />
           </div>
@@ -39,7 +41,7 @@ const Users = ({ user, answers }) => {
               display: flex;
               margin: 18px 0;
             }
-            img {
+            .profile-pic {
               height: 100px;
               border-radius: 50%;
               margin-right: 40px;
@@ -57,11 +59,23 @@ const Users = ({ user, answers }) => {
             }
             .answer {
               margin-bottom: 18px;
+              border: 1px solid #fafafa;
+              padding: 10px;
+            }
+            .answer img {
+              width: 120px;
+              margin-right: 16px;
             }
             .title {
               font-size: 12px;
               font-weight: bold;
               margin-bottom: 4px;
+            }
+            .card {
+              display: flex;
+            }
+            .card box {
+              display: flex;
             }
           `}
         </style>

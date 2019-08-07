@@ -7,8 +7,8 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const sanitizeHtml = require("sanitize-html");
 const linkifyUrls = require("linkify-urls");
-const getUrls = require("get-urls");
 const got = require("got");
+const urlRegex = require("url-regex");
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -42,14 +42,20 @@ app.post(
       title: req.body.title
     });
 
-    const firstUrl = [...getUrls(req.body.item)][0];
+    let item = req.body.item;
+
+    const firstUrl = item.match(urlRegex())[0];
+
+    removeCardUrl = item.replace(firstUrl, "");
+
+    console.log("item", removeCardUrl);
 
     const { body: meta } = await got(
       `${process.env.API_URL}/meta?url=${firstUrl}`,
       { json: true }
     );
 
-    const sanitizedAnswer = sanitizeHtml(linkifyUrls(req.body.item), {
+    const sanitizedAnswer = sanitizeHtml(linkifyUrls(removeCardUrl), {
       allowedTags: ["a"],
       allowedAttributes: {
         a: ["href"]
