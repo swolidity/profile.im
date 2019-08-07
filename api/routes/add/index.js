@@ -44,18 +44,23 @@ app.post(
 
     let item = req.body.item;
 
-    const firstUrl = item.match(urlRegex())[0];
+    let answerContent = item;
+    let meta = null;
 
-    removeCardUrl = item.replace(firstUrl, "");
+    if (item.match(urlRegex())) {
+      const firstUrl = item.match(urlRegex())[0];
 
-    console.log("item", removeCardUrl);
+      removeCardUrl = item.replace(firstUrl, "");
 
-    const { body: meta } = await got(
-      `${process.env.API_URL}/meta?url=${firstUrl}`,
-      { json: true }
-    );
+      const { body: meta } = await got(
+        `${process.env.API_URL}/meta?url=${firstUrl}`,
+        { json: true }
+      );
 
-    const sanitizedAnswer = sanitizeHtml(linkifyUrls(removeCardUrl), {
+      answerContent = linkifyUrls(removeCardUrl);
+    }
+
+    sanitizedAnswerContent = sanitizeHtml(answerContent, {
       allowedTags: ["a"],
       allowedAttributes: {
         a: ["href"]
@@ -67,7 +72,7 @@ app.post(
       user_id: req.user.user_id,
       question_id: question.ops[0]._id,
       title: question.ops[0].title,
-      answer: sanitizedAnswer,
+      answer: sanitizedAnswerContent,
       meta
     });
 

@@ -4,6 +4,7 @@ import AddToProfile from "../components/AddToProfile";
 import { useFetch } from "tipple";
 
 const Users = ({ user, answers }) => {
+  console.log(answers);
   return (
     <Layout>
       <div className="user-profile">
@@ -20,14 +21,28 @@ const Users = ({ user, answers }) => {
 
         {answers.map(answer => (
           <div className="answer" key={answer._id}>
-            <div className="title">{answer.title}</div>
-            <div className="card">
-              <div className="image box">
-                <img src={answer.meta.image} alt={answer.meta.title} />
-              </div>
-              <div className="box">{answer.meta.title}</div>
-            </div>
-            <div dangerouslySetInnerHTML={{ __html: answer.answer }} />
+            <div className="question-header">{answer.title}</div>
+
+            {answer.meta ? (
+              <a href={answer.meta.url} target="_blank">
+                <div className="card">
+                  <div className="image box">
+                    <img src={answer.meta.image} alt={answer.meta.title} />
+                  </div>
+                  <div className="box content">
+                    <div className="content-title">{answer.meta.title}</div>
+                    <div className="content-description">
+                      {answer.meta.description}
+                    </div>
+                  </div>
+                </div>
+              </a>
+            ) : null}
+
+            <div
+              className="answer-content"
+              dangerouslySetInnerHTML={{ __html: answer.answer }}
+            />
           </div>
         ))}
 
@@ -59,12 +74,24 @@ const Users = ({ user, answers }) => {
             }
             .answer {
               margin-bottom: 18px;
-              border: 1px solid #fafafa;
-              padding: 10px;
+              border: 2px solid #f8f8f8;
+              border-radius: 5px;
+            }
+            .answer a {
+              text-decoration: none;
             }
             .answer img {
               width: 120px;
               margin-right: 16px;
+            }
+            .answer-content {
+              padding: 8px;
+            }
+            .question-header {
+              padding: 8px;
+              font-weight: bold;
+              font-size: 12px;
+              border-bottom: 1px solid #f8f8f8;
             }
             .title {
               font-size: 12px;
@@ -76,6 +103,15 @@ const Users = ({ user, answers }) => {
             }
             .card box {
               display: flex;
+            }
+            .content {
+              padding: 8px 8px 8px 0;
+            }
+            .content-title {
+              margin-bottom: 6px;
+            }
+            .content-description {
+              font-size: 12px;
             }
           `}
         </style>
