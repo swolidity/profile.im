@@ -34,8 +34,6 @@ app.get("*", async (req, res) => {
 
   let statusCode, data;
 
-  console.log("USER AGENT", req.headers["user-agent"]);
-
   try {
     const { body: html } = await got(url, {
       headers: {
