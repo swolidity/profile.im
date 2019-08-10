@@ -3,6 +3,7 @@ import App, { Container } from "next/app";
 import fetch from "isomorphic-unfetch";
 import cookies from "next-cookies";
 import CurrentUserContext from "../context/currentUser";
+import "@fortawesome/fontawesome-svg-core/styles.css";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {

@@ -2,6 +2,7 @@ import "isomorphic-unfetch";
 import Layout from "../components/layout";
 import AddToProfile from "../components/AddToProfile";
 import { useFetch } from "tipple";
+import Link from "next/link";
 
 const Users = ({ user, answers }) => {
   return (
@@ -20,7 +21,11 @@ const Users = ({ user, answers }) => {
 
         {answers.map(answer => (
           <div className="answer" key={answer._id}>
-            <div className="question-header">{answer.title}</div>
+            <div className="question-header">
+              <Link href={`/${user.username}/${answer.slug}`}>
+                {answer.title}
+              </Link>
+            </div>
 
             {answer.meta ? (
               <a href={answer.meta.url} target="_blank">
