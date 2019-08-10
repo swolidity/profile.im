@@ -9,7 +9,7 @@ const Index = ({ users }) => (
   <Layout>
     <div className="homepage">
       <div className="center">
-        <h2 className="profiles-count">{users.length} PROFILES MADE</h2>
+        <h1 className="profiles-count">{users.length} PROFILES MADE</h1>
 
         <div className="facebook-signup-button">
           <FacebookLogin
@@ -41,10 +41,11 @@ const Index = ({ users }) => (
         }
         .profiles-count {
           text-align: center;
+          margin: 24px 0;
         }
         .facebook-signup-button {
           display: inline-block;
-          margin: 16px 0;
+          margin-bottom: 32px;
           padding: 12px;
           background-color: #4c6ef5;
           border-radius: 5px;
