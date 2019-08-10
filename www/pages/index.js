@@ -22,7 +22,7 @@ const Index = ({ users }) => (
                 <span className="facebook-icon">
                   <FontAwesomeIcon icon={faFacebookSquare} />
                 </span>{" "}
-                Login with Facebook
+                Sign Up with Facebook
               </div>
             )}
           />
