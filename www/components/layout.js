@@ -10,11 +10,9 @@ const Layout = ({ children }) => {
       <Meta />
 
       <div className="header">
-        <h1>
-          <Link href="/">
-            <a className="logo">profile.im</a>
-          </Link>
-        </h1>
+        <Link href="/">
+          <a className="logo">profile.im</a>
+        </Link>
       </div>
       <TippleProvider client={client}>{children}</TippleProvider>
 
@@ -26,6 +24,8 @@ const Layout = ({ children }) => {
           .logo {
             text-decoration: none;
             color: black;
+            font-size: 25px;
+            font-weight: bold;
           }
           logo:visited: {
             color: black;
