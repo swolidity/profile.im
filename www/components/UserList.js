@@ -50,6 +50,7 @@ export default ({ users }) =>
             .username {
               text-decoration: none;
               font-size: 22px;
+              font-weight: bold;
             }
           `}
         </style>

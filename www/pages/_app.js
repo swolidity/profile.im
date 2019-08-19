@@ -4,6 +4,10 @@ import fetch from "isomorphic-unfetch";
 import cookies from "next-cookies";
 import CurrentUserContext from "../context/currentUser";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import Router from "next/router";
+import withGA from "next-ga";
+
+import "normalize.css";
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
@@ -47,4 +51,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default withGA("UA-64366323-2", Router)(MyApp);
