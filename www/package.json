@@ -20,6 +20,7 @@
     "next-ga": "^2.3.4",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
+    "react-async": "^7.0.6",
     "react-dom": "^16.8.6",
     "react-facebook-login": "^4.1.1",
     "tipple": "^0.5.0"
