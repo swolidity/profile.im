@@ -25,7 +25,7 @@ const metascraper = require("metascraper")([
 app.use(helmet());
 
 app.get("*", async (req, res) => {
-  const url = req.query.url;
+  const url = encodeURI(req.query.url);
 
   if (!url)
     return res
