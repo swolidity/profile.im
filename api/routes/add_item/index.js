@@ -11,6 +11,7 @@ const got = require("got");
 const urlRegex = require("url-regex");
 const appendQuery = require("append-query");
 const ObjectID = require("mongodb").ObjectID;
+const { parse } = require("url");
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -61,8 +62,10 @@ app.post(
 
       meta = data;
 
-      // TODO: automatically add Amazon Affiliate ID
-      if (meta.publisher === "Amazon") {
+      if (
+        meta.publisher === "Amazon" ||
+        parse(meta.url).host === "www.amazon.com"
+      ) {
         meta.url = appendQuery(meta.url, { tag: "profiledotim-20" });
       }
 

@@ -1,7 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
 const app = express();
-const { parse } = require("url");
 const got = require("got");
 const metascraper = require("metascraper")([
   require("metascraper-author")(),

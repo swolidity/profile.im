@@ -13,9 +13,19 @@ const Answer = ({ answer }) => (
         {item.meta ? (
           <a href={item.meta.url} target="_blank">
             <div className="card">
-              <div className="image box">
-                <img src={item.meta.image} alt={item.meta.title} />
-              </div>
+              <div
+                className="image box"
+                style={{
+                  width: "80px",
+                  minWidth: "80px",
+                  height: "80px",
+                  backgroundImage: `url(${item.meta.image})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center center",
+                  marginRight: "16px"
+                }}
+              />
               <div className="box content">
                 <div className="content-title">{item.meta.title}</div>
               </div>
@@ -47,6 +57,7 @@ const Answer = ({ answer }) => (
           border-bottom: 1px solid #f8f8f8;
         }
         .answer img {
+          width: 80px;
           height: 80px;
           margin-right: 16px;
         }
