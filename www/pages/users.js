@@ -4,6 +4,76 @@ import AddToProfile from "../components/AddToProfile";
 import { useFetch } from "tipple";
 import Link from "next/link";
 
+const Answer = ({ answer, user }) => (
+  <div className="answer">
+    <div className="question-header">
+      <Link href={`/${user.username}/${answer.slug}`}>
+        <a>{answer.title}</a>
+      </Link>
+    </div>
+
+    {answer.items.map((item, index) => (
+      <div key={index}>
+        {item.meta ? (
+          <a href={item.meta.url} target="_blank">
+            <div className="card">
+              <div className="image box">
+                <img src={item.meta.image} alt={item.meta.title} />
+              </div>
+              <div className="box content">
+                <div className="content-title">{item.meta.title}</div>
+                <div className="content-description">
+                  {item.meta.description}
+                </div>
+              </div>
+            </div>
+          </a>
+        ) : null}
+
+        <div
+          className="answer-content"
+          dangerouslySetInnerHTML={{ __html: answer.content }}
+        />
+      </div>
+    ))}
+
+    <style jsx>
+      {`
+        .answer {
+          margin-bottom: 18px;
+          border: 2px solid #f8f8f8;
+          border-radius: 5px;
+        }
+        .answer a {
+          text-decoration: none;
+        }
+        .answer img {
+          width: 120px;
+          margin-right: 16px;
+        }
+        .answer-content {
+          padding: 8px;
+        }
+        .card {
+          display: flex;
+        }
+        .card box {
+          display: flex;
+        }
+        .content {
+          padding: 8px 8px 8px 0;
+        }
+        .content-title {
+          margin-bottom: 6px;
+        }
+        .content-description {
+          font-size: 12px;
+        }
+      `}
+    </style>
+  </div>
+);
+
 const Users = ({ user, answers }) => {
   return (
     <Layout>
@@ -20,34 +90,7 @@ const Users = ({ user, answers }) => {
         <AddToProfile />
 
         {answers.map(answer => (
-          <div className="answer" key={answer._id}>
-            <div className="question-header">
-              <Link href={`/${user.username}/${answer.slug}`}>
-                {answer.title}
-              </Link>
-            </div>
-
-            {answer.meta ? (
-              <a href={answer.meta.url} target="_blank">
-                <div className="card">
-                  <div className="image box">
-                    <img src={answer.meta.image} alt={answer.meta.title} />
-                  </div>
-                  <div className="box content">
-                    <div className="content-title">{answer.meta.title}</div>
-                    <div className="content-description">
-                      {answer.meta.description}
-                    </div>
-                  </div>
-                </div>
-              </a>
-            ) : null}
-
-            <div
-              className="answer-content"
-              dangerouslySetInnerHTML={{ __html: answer.answer }}
-            />
-          </div>
+          <Answer answer={answer} user={user} key={answer._id} />
         ))}
 
         <style jsx>
@@ -76,21 +119,7 @@ const Users = ({ user, answers }) => {
               margin: 14px 0;
               font-size: 14px;
             }
-            .answer {
-              margin-bottom: 18px;
-              border: 2px solid #f8f8f8;
-              border-radius: 5px;
-            }
-            .answer a {
-              text-decoration: none;
-            }
-            .answer img {
-              width: 120px;
-              margin-right: 16px;
-            }
-            .answer-content {
-              padding: 8px;
-            }
+
             .question-header {
               padding: 8px;
               font-weight: bold;
@@ -101,21 +130,6 @@ const Users = ({ user, answers }) => {
               font-size: 12px;
               font-weight: bold;
               margin-bottom: 4px;
-            }
-            .card {
-              display: flex;
-            }
-            .card box {
-              display: flex;
-            }
-            .content {
-              padding: 8px 8px 8px 0;
-            }
-            .content-title {
-              margin-bottom: 6px;
-            }
-            .content-description {
-              font-size: 12px;
             }
           `}
         </style>

@@ -84,8 +84,12 @@ app.post(
       user_id: req.user.user_id,
       question_id: question.ops[0]._id,
       title: question.ops[0].title,
-      answer: sanitizedAnswerContent,
-      meta
+      items: [
+        {
+          content: sanitizedAnswerContent,
+          meta
+        }
+      ]
     });
 
     res.send(answer.ops[0]);
