@@ -15,6 +15,12 @@ app.get("*", async (req, res) => {
     .collection("answers")
     .findOne({ _id: new ObjectID(req.query.id) });
 
+  const user = await db
+    .collection("users")
+    .findOne({ _id: new ObjectID(answer.user_id) });
+
+  answer.user = user;
+
   if (!answer) {
     return res.status("404").send("Answer not found");
   }

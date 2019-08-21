@@ -14,7 +14,9 @@ const Layout = ({ children }) => {
           <a className="logo">profile.im</a>
         </Link>
       </div>
-      <TippleProvider client={client}>{children}</TippleProvider>
+      <TippleProvider client={client}>
+        <main className="main">{children}</main>
+      </TippleProvider>
 
       <style jsx>
         {`
@@ -29,6 +31,10 @@ const Layout = ({ children }) => {
           }
           logo:visited: {
             color: black;
+          }
+          .main {
+            max-width: 800px;
+            margin: 0 auto;
           }
         `}
       </style>

@@ -25,10 +25,6 @@ const Users = ({ user, answers }) => {
 
         <style jsx>
           {`
-            .user-profile {
-              max-width: 800px;
-              margin: 0 auto;
-            }
             .profile-top {
               display: flex;
               margin: 18px 0;

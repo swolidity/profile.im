@@ -1,12 +1,12 @@
 import Layout from "../../components/layout";
 import "isomorphic-unfetch";
-import Answer from "../../components/Answer";
+import Answer from "../../components/AnswerLarge";
 import AddToAnswer from "../../components/AddToAnswer";
 
 const AnswerPage = ({ answer }) => (
   <Layout>
     <AddToAnswer answerID={answer._id} />
-    <Answer answer={answer} />;
+    <Answer answer={answer} />
   </Layout>
 );
 AnswerPage.getInitialProps = async ({ query: { id } }) => {
