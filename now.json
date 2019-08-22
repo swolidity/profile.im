@@ -10,7 +10,7 @@
   },
   "builds": [
     { "src": "api/routes/**/*.js", "use": "@now/node" },
-    { "src": "www/package.json", "use": "@now/next@canary" }
+    { "src": "www/package.json", "use": "@now/next" }
   ],
   "routes": [
     {
@@ -25,6 +25,7 @@
       "src": "/api/(.*)",
       "dest": "/api/routes/$1"
     },
-    { "src": "/(.*)", "dest": "/www/$1", "continue": true }
+    { "src": "/(.*)", "dest": "/www/$1" },
+    { "src": "/(.*)", "continue": true }
   ]
 }
