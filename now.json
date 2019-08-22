@@ -25,7 +25,6 @@
       "src": "/api/(.*)",
       "dest": "/api/routes/$1"
     },
-    { "src": "/(.*)", "dest": "/www/$1" },
-    { "src": "/(.*)", "continue": true }
+    { "src": "/(.*)", "dest": "/www/$1", "continue": true }
   ]
 }
