@@ -1,6 +1,6 @@
 import "isomorphic-unfetch";
 import Layout from "../components/layout";
-import AddToProfile from "../components/AddToProfile";
+
 import { useFetch } from "tipple";
 import Answer from "../components/Answer";
 
@@ -11,12 +11,10 @@ const Users = ({ user, answers }) => {
         <div className="profile-top">
           <img className="profile-pic" src={user.picture} alt={user.name} />
           <div>
-            <div className="username">{user.username}</div>
+            <div className="username">@{user.username}</div>
             <div className="views">{user.profile_views} views</div>
           </div>
         </div>
-
-        <AddToProfile />
 
         {answers.map(answer => (
           <Answer answer={answer} user={user} key={answer._id} />
@@ -29,17 +27,17 @@ const Users = ({ user, answers }) => {
               margin: 18px 0;
             }
             .profile-pic {
-              height: 50px;
+              height: 80px;
               border-radius: 50%;
               margin-right: 40px;
             }
             .username {
-              font-size: 22px;
+              font-size: 36px;
               font-weight: bold;
               margin-bottom: 4px;
             }
             .views {
-              font-size: 14px;
+              font-size: 18px;
             }
             .title {
               font-size: 12px;

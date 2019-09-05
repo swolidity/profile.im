@@ -26,7 +26,7 @@ const Layout = ({ children }) => {
       <style jsx>
         {`
           .header {
-            padding: 16px 32px;
+            padding: 32px;
             display: flex;
             justify-content: space-between;
           }

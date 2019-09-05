@@ -26,12 +26,12 @@ passport.use(
             name: profile.name,
             picture: `https://graph.facebook.com/${profile.id}/picture?type=large`,
             email: profile.email,
-            username: profile.id
+            username: profile.name.replace(/\s/g, "").toLowerCase()
           }
         },
         {
           returnNewDocument: true,
-          upsert: true
+          upsert: false
         }
       );
 

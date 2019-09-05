@@ -1,7 +1,7 @@
 import "isomorphic-unfetch";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import UserList from "../components/UserList";
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 import LoginButton from "../components/LoginButton";

@@ -1,1 +1,3 @@
-export default () => <div>Add</div>;
+import AddToProfile from "../components/AddToProfile";
+
+export default () => <AddToProfile />;
