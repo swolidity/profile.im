@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { useFetch } from "react-async";
-import CurrentUserContext from "../context/currentUser";
+import { useLoggedInUser } from "../hooks/useLoggedInUser";
 
 export default ({ answerID }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const user = useLoggedInUser();
   const [inputs, setState] = useState({ item: "" });
   const { data, error, isLoading, run } = useFetch(
     `${process.env.API_URL}/add_item`,
@@ -28,7 +28,7 @@ export default ({ answerID }) => {
     run();
   };
 
-  if (!currentUser) {
+  if (!user) {
     return null;
   }
 

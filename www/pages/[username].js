@@ -1,7 +1,6 @@
 import "isomorphic-unfetch";
 import Layout from "../components/Layout";
 
-import { useFetch } from "tipple";
 import Answer from "../components/Answer";
 
 const Users = ({ user, answers }) => {

@@ -1,19 +1,10 @@
 import { useContext } from "react";
 import { useState } from "react";
-import { usePush } from "tipple";
-import CurrentUserContext from "../context/currentUser";
+import { useLoggedInUser } from "../hooks/useLoggedInUser";
 
 export default () => {
-  const currentUser = useContext(CurrentUserContext);
+  const user = useLoggedInUser();
   const [inputs, setState] = useState({ title: "", item: "" });
-  const [req, execute, clear] = usePush("/add", {
-    domains: ["profile-items"],
-    fetchOptions: {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(inputs)
-    }
-  });
 
   const handleInputChange = e => {
     e.persist();
@@ -22,10 +13,9 @@ export default () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    execute();
   };
 
-  if (!currentUser) {
+  if (!user) {
     return null;
   }
 
