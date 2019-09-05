@@ -4,6 +4,7 @@ import UserList from "../components/UserList";
 import Layout from "../components/layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
+import LoginButton from "../components/LoginButton";
 
 const Index = ({ users }) => (
   <Layout>
@@ -11,22 +12,7 @@ const Index = ({ users }) => (
       <div className="center">
         <h1 className="profiles-count">{users.length} PROFILES MADE</h1>
 
-        <div className="facebook-signup-button">
-          <FacebookLogin
-            appId={process.env.FACEBOOK_APP_ID}
-            fields="name,email,picture"
-            redirectUri={`${process.env.API_URL}/login`}
-            isMobile={true}
-            render={renderProps => (
-              <div onClick={renderProps.onClick}>
-                <span className="facebook-icon">
-                  <FontAwesomeIcon icon={faFacebookSquare} />
-                </span>{" "}
-                Sign Up with Facebook
-              </div>
-            )}
-          />
-        </div>
+        <LoginButton />
       </div>
 
       <UserList users={users} />
@@ -42,25 +28,6 @@ const Index = ({ users }) => (
         .profiles-count {
           text-align: center;
           margin: 24px 0;
-        }
-        .facebook-signup-button {
-          display: inline-block;
-          margin-bottom: 32px;
-          padding: 12px;
-          background-color: #4c6ef5;
-          border-radius: 5px;
-          font-size: 16px;
-          font-weight: bold;
-          color: #fff;
-          cursor: pointer;
-        }
-        .facebook-icon {
-          color: #fff;
-          margin-right: 8px;
-        }
-        .sign-up {
-          text-align: center;
-          margin-bottom: 28px;
         }
       `}</style>
     </div>

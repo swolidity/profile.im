@@ -63,3 +63,5 @@ typings/
 secrets
 .env
 .env.build
+
+.DS_Store

@@ -13,7 +13,6 @@ const Users = ({ user, answers }) => {
           <div>
             <div className="username">{user.username}</div>
             <div className="views">{user.profile_views} views</div>
-            <div className="bio">{user.bio}</div>
           </div>
         </div>
 
@@ -30,22 +29,18 @@ const Users = ({ user, answers }) => {
               margin: 18px 0;
             }
             .profile-pic {
-              height: 100px;
+              height: 50px;
               border-radius: 50%;
               margin-right: 40px;
             }
             .username {
               font-size: 22px;
               font-weight: bold;
+              margin-bottom: 4px;
             }
             .views {
               font-size: 14px;
             }
-            .bio {
-              margin: 14px 0;
-              font-size: 14px;
-            }
-
             .title {
               font-size: 12px;
               font-weight: bold;

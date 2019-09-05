@@ -1,6 +1,7 @@
 import Meta from "./meta";
 import { createClient, TippleProvider } from "tipple";
 import Link from "next/link";
+import LoginButton from "./LoginButton";
 
 const client = createClient({ baseUrl: process.env.API_URL });
 
@@ -11,8 +12,12 @@ const Layout = ({ children }) => {
 
       <div className="header">
         <Link href="/">
-          <a className="logo">profile.im</a>
+          <a className="logo">
+            <img height="45" src="/static/logo.png" alt="profile.im" />
+          </a>
         </Link>
+
+        <LoginButton />
       </div>
       <TippleProvider client={client}>
         <main className="main">{children}</main>
@@ -21,7 +26,9 @@ const Layout = ({ children }) => {
       <style jsx>
         {`
           .header {
-            padding: 16px;
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
           }
           .logo {
             text-decoration: none;

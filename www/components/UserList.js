@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default ({ users }) =>
   users.map(user => (
-    <Link href={`/${user.username}`} key={user._id}>
+    <Link href="/[username]" as={`/${user.username}`} key={user._id}>
       <div className="user-list-item">
         <div className="profile-picture-box">
           <img

@@ -24,10 +24,9 @@ passport.use(
           $set: {
             facebook_id: profile.id,
             name: profile.name,
-            picture: `https://graph.facebook.com/${
-              profile.id
-            }/picture?type=large`,
-            email: profile.email
+            picture: `https://graph.facebook.com/${profile.id}/picture?type=large`,
+            email: profile.email,
+            username: profile.id
           }
         },
         {
