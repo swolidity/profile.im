@@ -8,7 +8,7 @@ const client = createClient({ baseUrl: process.env.API_URL });
 
 const Layout = ({ children }) => {
   const user = useLoggedInUser();
-  console.log("uuuuusssser", user);
+
   return (
     <div>
       <Meta />

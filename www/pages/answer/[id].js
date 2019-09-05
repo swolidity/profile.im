@@ -1,4 +1,4 @@
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
 import "isomorphic-unfetch";
 import Answer from "../../components/AnswerLarge";
 import AddToAnswer from "../../components/AddToAnswer";

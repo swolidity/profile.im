@@ -32,8 +32,6 @@ export default ({ answerID }) => {
     return null;
   }
 
-  console.log(inputs);
-
   return (
     <form onSubmit={handleSubmit}>
       <div>Add to answer</div>
