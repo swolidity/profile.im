@@ -2,10 +2,10 @@ import React, { createContext } from "react";
 import App, { Container } from "next/app";
 import fetch from "isomorphic-unfetch";
 import cookies from "next-cookies";
-import CurrentUserContext from "../context/currentUser";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import Router from "next/router";
 import withGA from "next-ga";
+import { LoggedInUserProvider } from "../hooks/useLoggedInUser";
 
 import "normalize.css";
 
@@ -43,9 +43,9 @@ class MyApp extends App {
 
     return (
       <Container>
-        <CurrentUserContext.Provider value={user}>
+        <LoggedInUserProvider user={user}>
           <Component {...pageProps} />
-        </CurrentUserContext.Provider>
+        </LoggedInUserProvider>
       </Container>
     );
   }

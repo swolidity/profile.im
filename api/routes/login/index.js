@@ -55,7 +55,7 @@ app.get(
     const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET);
 
     res.cookie("jwt", token);
-    res.send({ user, token });
+    res.redirect("/" + user.username);
   }
 );
 

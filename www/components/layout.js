@@ -2,10 +2,13 @@ import Meta from "./meta";
 import { createClient, TippleProvider } from "tipple";
 import Link from "next/link";
 import LoginButton from "./LoginButton";
+import { useLoggedInUser } from "../hooks/useLoggedInUser";
 
 const client = createClient({ baseUrl: process.env.API_URL });
 
 const Layout = ({ children }) => {
+  const user = useLoggedInUser();
+  console.log("uuuuusssser", user);
   return (
     <div>
       <Meta />
@@ -17,7 +20,11 @@ const Layout = ({ children }) => {
           </a>
         </Link>
 
-        <LoginButton />
+        {user ? (
+          <img className="profile-pic" src={user.picture} alt={user.username} />
+        ) : (
+          <LoginButton />
+        )}
       </div>
       <TippleProvider client={client}>
         <main className="main">{children}</main>
@@ -42,6 +49,11 @@ const Layout = ({ children }) => {
           .main {
             max-width: 800px;
             margin: 0 auto;
+          }
+          .profile-pic {
+            height: 45px;
+            width: 45px;
+            border-radius: 50%;
           }
         `}
       </style>
