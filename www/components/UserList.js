@@ -4,7 +4,7 @@ export default ({ users }) =>
   users.map(user => (
     <Link href="/[username]" as={`/${user.username}`} key={user._id}>
       <div className="user-list-item">
-        <div className="profile-picture-box">
+        <div className="profile-picture-box box">
           <img
             className="profile-picture"
             src={user.picture}
@@ -30,6 +30,8 @@ export default ({ users }) =>
               text-decoration: none;
               cursor: pointer;
               border-radius: 5px;
+              align-content: center;
+              align-items: center;
             }
             .user-list-item:hover {
               background: #f8f8f8;
