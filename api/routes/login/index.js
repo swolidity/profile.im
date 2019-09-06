@@ -31,7 +31,7 @@ passport.use(
         },
         {
           returnNewDocument: true,
-          upsert: false
+          upsert: true
         }
       );
 
