@@ -5,6 +5,9 @@ export default () => (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
+      <meta property="og:title" content="profile.im" />
+
+      <meta property="og:image" content="/static/fb_app_icon.png" />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
