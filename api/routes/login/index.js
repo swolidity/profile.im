@@ -30,11 +30,13 @@ passport.use(
           }
         },
         {
+          upsert: true,
           returnNewDocument: true,
-          upsert: true
+          returnOriginal: false
         }
       );
 
+      console.log("UZZZZZERRRRR", user);
       return cb(null, user);
     }
   )
@@ -54,6 +56,7 @@ app.get(
     const user = req.user;
     const token = jwt.sign({ user_id: user._id }, process.env.JWT_SECRET);
 
+    console.log("huurrr");
     res.cookie("jwt", token);
     res.redirect("/" + user.username);
   }
