@@ -18,7 +18,15 @@ const Layout = ({ children }) => {
         </Link>
 
         {user ? (
-          <img className="profile-pic" src={user.picture} alt={user.username} />
+          <Link href="/[username]" as={`/${user.username}`}>
+            <a>
+              <img
+                className="profile-pic"
+                src={user.picture}
+                alt={user.username}
+              />
+            </a>
+          </Link>
         ) : (
           <LoginButton />
         )}
