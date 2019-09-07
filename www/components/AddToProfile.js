@@ -1,10 +1,21 @@
 import { useContext } from "react";
 import { useState } from "react";
 import { useLoggedInUser } from "../hooks/useLoggedInUser";
+import { useFetch } from "react-async";
 
 export default () => {
   const user = useLoggedInUser();
   const [inputs, setState] = useState({ title: "", item: "" });
+  const { data, error, isLoading, run } = useFetch(
+    `${process.env.API_URL}/add`,
+    {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(inputs)
+    }
+  );
 
   const handleInputChange = e => {
     e.persist();
@@ -13,6 +24,7 @@ export default () => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    run();
   };
 
   if (!user) {
