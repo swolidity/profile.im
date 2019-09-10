@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
       <div className="header">
         <Link href="/">
           <a className="logo">
-            <img height="45" src="/static/logo.png" alt="profile.im" />
+            <img height="25" src="/static/logo.png" alt="profile.im" />
           </a>
         </Link>
 
@@ -40,6 +40,7 @@ const Layout = ({ children }) => {
             padding: 32px;
             display: flex;
             justify-content: space-between;
+            align-items: center;
           }
           .logo {
             text-decoration: none;
