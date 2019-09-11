@@ -35,7 +35,7 @@ const Answer = ({ answer }) => (
 
         <div
           className="answer-content"
-          dangerouslySetInnerHTML={{ __html: answer.content }}
+          dangerouslySetInnerHTML={{ __html: item.content }}
         />
       </div>
     ))}
