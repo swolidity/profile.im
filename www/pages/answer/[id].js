@@ -1,7 +1,6 @@
 import Layout from "../../components/Layout";
 import "isomorphic-unfetch";
 import Answer from "../../components/AnswerLarge";
-import AddToAnswer from "../../components/AddToAnswer";
 import Head from "next/head";
 
 const AnswerPage = ({ answer }) => (
@@ -18,7 +17,6 @@ const AnswerPage = ({ answer }) => (
 
       <meta property="og:image" content={answer.user.picture} />
     </Head>
-    <AddToAnswer answerID={answer._id} />
     <Answer answer={answer} />
   </Layout>
 );
