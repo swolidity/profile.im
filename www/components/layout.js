@@ -14,7 +14,6 @@ const Layout = ({ children }) => {
         <Link href="/">
           <a className="logo">
             <img height="45" src="/static/logo@2x.png" alt="profile.im" />
-            profile.im
           </a>
         </Link>
 
@@ -48,14 +47,9 @@ const Layout = ({ children }) => {
             color: black;
             font-size: 25px;
             font-weight: bold;
-            display: flex;
-            align-items: center;
           }
           logo:visited: {
             color: black;
-          }
-          .logo > img {
-            margin-right: 16px;
           }
           .main {
             max-width: 800px;
