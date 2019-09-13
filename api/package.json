@@ -40,6 +40,7 @@
     "passport": "^0.4.0",
     "passport-facebook": "^3.0.0",
     "sanitize-html": "^1.20.1",
-    "url-regex": "^5.0.0"
+    "url-regex": "^5.0.0",
+    "youtube-search": "^1.1.4"
   }
 }
