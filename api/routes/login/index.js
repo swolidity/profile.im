@@ -36,7 +36,6 @@ passport.use(
         }
       );
 
-      console.log("UZZZZZERRRRR", user);
       return cb(null, user);
     }
   )
