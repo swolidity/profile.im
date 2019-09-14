@@ -7,7 +7,7 @@
     "FACEBOOK_APP_ID": "2815966931762706",
     "FACEBOOK_APP_SECRET": "@facebook-app-secret",
     "JWT_SECRET": "@jwt-secret",
-    "YOUTUBE_API_KEY": "AIzaSyBF2D3sjCVeMcO2S3oLvisqEXVeVZVwleE"
+    "YOUTUBE_API_KEY": "@profileim-youtube-api-key"
   },
   "builds": [
     { "src": "api/routes/**/*.js", "use": "@now/node" },
