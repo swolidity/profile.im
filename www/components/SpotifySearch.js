@@ -4,19 +4,24 @@ import fetch from "isomorphic-unfetch";
 
 const headers = {
   Accept: "application/json",
-  Authorization: `Bearer BQCl_xjxm8IOfBTugxG55u62UqPTZPLD0K5fjVsx7Rs9OcrdJYBvovgZhEj6nf9XrjYwedg32wBteSX23kQ`
+  Authorization: `Bearer BQATs_EDvrwt82201UnO9PsB-ocI6FwyCGNtNYOoWfA_TryZm9RyFb9A3abH8OD9LR_o23xo-DhHuw4PiHg`
 };
 
-const search = ({ query, type = "track" }) => {
-  fetch(`https://api.spotify.com/v1/search?q=${query}&type=${type}`, {
-    headers
-  })
+const search = ({ query, type = "track,artist" }) => {
+  return fetch(
+    encodeURI(`https://api.spotify.com/v1/search?q=${query}&type=${type}`),
+    {
+      headers
+    }
+  )
     .then(res => (res.ok ? res : Promise.reject(res)))
     .then(res => res.json());
 };
 
 export default () => {
   const [songs, setSongs] = useState([]);
+
+  console.log(songs);
 
   return (
     <div>
@@ -30,7 +35,8 @@ export default () => {
         onInputValueChange={async inputValue => {
           const results = await search({ query: inputValue });
           console.log(results);
-          setSongs(results.items);
+
+          if (results) setSongs(results.tracks.items);
         }}
       >
         {({
@@ -45,7 +51,7 @@ export default () => {
           <div>
             <input
               {...getInputProps({
-                placeholder: "Search YouTube or Enter URL"
+                placeholder: "Search Spotify or Enter URL"
               })}
               className="search"
             />
@@ -63,7 +69,7 @@ export default () => {
                           fontWeight: selectedItem === item ? "bold" : "normal"
                         }
                       })}
-                      className="video"
+                      className="song-item"
                     >
                       <div className="thumbnail">
                         <img src={item.album.images[1].url} />
@@ -84,9 +90,14 @@ export default () => {
             width: 100%;
             padding: 16px;
           }
-          :global(.video) {
+          :global(.song-item) {
             display: flex;
             align-items: center;
+            cursor: pointer;
+          }
+          :global(.song-item > .thumbnail > img) {
+            width: 50px;
+            height: 50px;
           }
         `}
       </style>
