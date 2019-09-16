@@ -3,38 +3,50 @@ import Downshift from "downshift";
 import fetch from "isomorphic-unfetch";
 
 const headers = {
-  Accept: "application/json",
-  Authorization: `Bearer BQATs_EDvrwt82201UnO9PsB-ocI6FwyCGNtNYOoWfA_TryZm9RyFb9A3abH8OD9LR_o23xo-DhHuw4PiHg`
+  Accept: "application/json"
 };
 
-const search = ({ query, type = "track,artist" }) => {
-  return fetch(
-    encodeURI(`https://api.spotify.com/v1/search?q=${query}&type=${type}`),
-    {
-      headers
-    }
-  )
+const search = ({ query }) => {
+  return fetch(encodeURI(`${process.env.API_URL}/spotify?search=${query}`), {
+    headers
+  })
     .then(res => (res.ok ? res : Promise.reject(res)))
     .then(res => res.json());
 };
 
 export default () => {
   const [songs, setSongs] = useState([]);
+  const [selected, setSelected] = useState();
 
-  console.log(songs);
+  console.log("selected", selected);
 
   return (
     <div>
+      {selected ? (
+        <div className="song-item">
+          <div className="thumbnail">
+            <img src={selected.album.images[1].url} />
+          </div>
+          <div>
+            <div className="name">{selected.name}</div>
+            <div>{selected.artists[0].name}</div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
       <Downshift
-        onChange={selection =>
-          alert(
-            selection ? `You selected ${selection.title}` : "Selection Cleared"
-          )
-        }
-        itemToString={item => (item ? item.value : "")}
+        onChange={selection => {
+          setSelected(selection);
+        }}
+        itemToString={item => (item ? item.name : "")}
         onInputValueChange={async inputValue => {
+          if (inputValue === "") {
+            //setSongs([]);
+            return;
+          }
+
           const results = await search({ query: inputValue });
-          console.log(results);
 
           if (results) setSongs(results.tracks.items);
         }}
@@ -44,23 +56,24 @@ export default () => {
           getItemProps,
           getMenuProps,
           isOpen,
-          inputValue,
           highlightedIndex,
-          selectedItem
+          selectedItem,
+          inputValue
         }) => (
           <div>
             <input
               {...getInputProps({
-                placeholder: "Search Spotify or Enter URL"
+                value: inputValue
               })}
+              placeholder="Search Spotify or Enter URL"
               className="search"
             />
             <div {...getMenuProps()}>
-              {isOpen
+              {isOpen || true
                 ? songs.map((item, index) => (
                     <div
                       {...getItemProps({
-                        key: item.value,
+                        key: item.id,
                         index,
                         item,
                         style: {
@@ -75,7 +88,12 @@ export default () => {
                         <img src={item.album.images[1].url} />
                       </div>
 
-                      <div className="title">{item.name}</div>
+                      <div>
+                        <div className="name">{item.name}</div>
+                        <div className="artist-name">
+                          {item.artists[0].name}
+                        </div>
+                      </div>
                     </div>
                   ))
                 : null}
@@ -89,15 +107,29 @@ export default () => {
           div :global(.search) {
             width: 100%;
             padding: 16px;
+            margin-bottom: 16px;
           }
           :global(.song-item) {
             display: flex;
             align-items: center;
             cursor: pointer;
+            margin-bottom: 16px;
+          }
+          :global(.song-item > .thumbnail) {
+            margin-right: 16px;
+            height: 50px;
+            width: 50px;
           }
           :global(.song-item > .thumbnail > img) {
             width: 50px;
             height: 50px;
+          }
+          :global(.song-item .name) {
+            margin-bottom: 4px;
+            font-weight: bold;
+          }
+          :global(.song-item .artist-name) {
+            font-size: 14px;
           }
         `}
       </style>
