@@ -40,7 +40,7 @@ export default () => {
         itemToString={item => (item ? item.name : "")}
         onInputValueChange={async inputValue => {
           if (inputValue === "") {
-            //setSongs([]);
+            setSongs([]);
             return;
           }
 
@@ -67,7 +67,7 @@ export default () => {
               className="search"
             />
             <div {...getMenuProps()}>
-              {isOpen || true
+              {isOpen
                 ? songs.map((item, index) => (
                     <div
                       {...getItemProps({
