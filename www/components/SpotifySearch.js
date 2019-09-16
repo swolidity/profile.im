@@ -18,18 +18,19 @@ export default () => {
   const [songs, setSongs] = useState([]);
   const [selected, setSelected] = useState();
 
+  console.log(selected);
+
   return (
     <div>
       {selected ? (
-        <div className="song-item">
-          <div className="thumbnail">
-            <img src={selected.album.images[1].url} />
-          </div>
-          <div>
-            <div className="name">{selected.name}</div>
-            <div>{selected.artists[0].name}</div>
-          </div>
-        </div>
+        <iframe
+          src={`https://embed.spotify.com/?uri=${selected.uri}&theme=white&view=coverart`}
+          width="100%"
+          height="80"
+          frameBorder="0"
+          allowtransparency="true"
+          allow="encrypted-media"
+        ></iframe>
       ) : (
         ""
       )}
@@ -63,7 +64,7 @@ export default () => {
               {...getInputProps({
                 value: inputValue
               })}
-              placeholder="Search Spotify or Enter URL"
+              placeholder="Search Spotify..."
               className="search"
             />
             <div {...getMenuProps()}>
@@ -102,32 +103,35 @@ export default () => {
 
       <style jsx>
         {`
-          div :global(.search) {
+          .search {
             width: 100%;
             padding: 16px;
             margin-bottom: 16px;
           }
-          :global(.song-item) {
+          .song-item {
             display: flex;
             align-items: center;
             cursor: pointer;
             margin-bottom: 16px;
           }
-          :global(.song-item > .thumbnail) {
+          .thumbnail {
             margin-right: 16px;
             height: 50px;
             width: 50px;
           }
-          :global(.song-item > .thumbnail > img) {
+          .song-item > .thumbnail > img {
             width: 50px;
             height: 50px;
           }
-          :global(.song-item .name) {
+          .song-item .name {
             margin-bottom: 4px;
             font-weight: bold;
           }
-          :global(.song-item .artist-name) {
+          .song-item .artist-name {
             font-size: 14px;
+          }
+          .add {
+            margin-left: auto;
           }
         `}
       </style>

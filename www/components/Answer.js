@@ -8,53 +8,64 @@ const Answer = ({ answer }) => (
       </Link>
     </div>
 
-    {answer.items.map((item, index) => (
-      <div key={index}>
-        {item.meta ? (
-          <a href={item.meta.url} target="_blank">
-            <div className="card">
-              <div
-                className="image box"
-                style={{
-                  width: "80px",
-                  minWidth: "80px",
-                  height: "80px",
-                  backgroundImage: `url(${item.meta.image})`,
-                  backgroundSize: "cover",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center center",
-                  marginRight: "16px"
-                }}
-              />
-              <div className="box content">
-                <div className="content-title">{item.meta.title}</div>
+    {answer.type === "spotify" ? (
+      <iframe
+        src={`https://embed.spotify.com/?uri=${answer.uri}&theme=white&view=coverart`}
+        width="100%"
+        height="80"
+        frameBorder="0"
+        allowtransparency="true"
+        allow="encrypted-media"
+      ></iframe>
+    ) : (
+      answer.items.map((item, index) => (
+        <div key={index}>
+          {item.meta ? (
+            <a href={item.meta.url} target="_blank">
+              <div className="card">
+                <div
+                  className="image box"
+                  style={{
+                    width: "80px",
+                    minWidth: "80px",
+                    height: "80px",
+                    backgroundImage: `url(${item.meta.image})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center center",
+                    marginRight: "16px"
+                  }}
+                />
+                <div className="box content">
+                  <div className="content-title">{item.meta.title}</div>
+                </div>
               </div>
-            </div>
-          </a>
-        ) : null}
+            </a>
+          ) : null}
 
-        <div
-          className="answer-content"
-          dangerouslySetInnerHTML={{ __html: item.content }}
-        />
-      </div>
-    ))}
+          <div
+            className="answer-content"
+            dangerouslySetInnerHTML={{ __html: item.content }}
+          />
+        </div>
+      ))
+    )}
 
     <style jsx>
       {`
         .answer {
           margin-bottom: 18px;
-          border: 2px solid #f8f8f8;
-          border-radius: 5px;
         }
         .answer a {
           text-decoration: none;
         }
         .question-header {
-          padding: 8px;
           font-weight: bold;
           font-size: 12px;
-          border-bottom: 1px solid #f8f8f8;
+          margin-bottom: 6px;
+        }
+        .question-header a {
+          color: #000;
         }
         .answer img {
           width: 80px;
