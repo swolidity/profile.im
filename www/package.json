@@ -2,6 +2,9 @@
   "name": "www",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "now-build": "next build",
     "test": "echo \"Error: no test specified\" && exit 1"
