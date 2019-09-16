@@ -42,7 +42,6 @@ app.get("*", async (req, res) => {
     data = await metascraper({ url, html });
     statusCode = 200;
   } catch (err) {
-    console.log(err);
     statusCode = 401;
     data = {
       message: `Scraping the open graph data from "${url}" failed.`,

@@ -74,11 +74,7 @@ app.get(
       const newTokenJSON = await newTokenRes.json();
 
       token = newTokenJSON.access_token;
-
-      console.log("TOKEN", newTokenJSON);
     }
-
-    console.log("saved token", token);
 
     const results = await search({ query: req.query.search });
 

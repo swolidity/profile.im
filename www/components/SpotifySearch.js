@@ -18,8 +18,6 @@ export default () => {
   const [songs, setSongs] = useState([]);
   const [selected, setSelected] = useState();
 
-  console.log("selected", selected);
-
   return (
     <div>
       {selected ? (
