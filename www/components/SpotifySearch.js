@@ -24,7 +24,7 @@ export default () => {
     <div>
       {selected ? (
         <iframe
-          src={`https://embed.spotify.com/?uri=${selected.uri}&theme=white&view=coverart`}
+          src={`https://embed.spotify.com/?uri=${selected.uri}`}
           width="100%"
           height="80"
           frameBorder="0"

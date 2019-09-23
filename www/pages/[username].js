@@ -10,9 +10,15 @@ const Users = ({ user, answers }) => {
         <div className="profile-top">
           <img className="profile-pic" src={user.picture} alt={user.name} />
           <div>
+            <div className="name">Andy Kay</div>
             <div className="username">@{user.username}</div>
-            <div className="views">{user.profile_views} views</div>
           </div>
+        </div>
+
+        <div className="bio">{user.bio}</div>
+
+        <div className="views">
+          <span className="bold">{user.profile_views}</span> views
         </div>
 
         {answers.map(answer => (
@@ -21,27 +27,42 @@ const Users = ({ user, answers }) => {
 
         <style jsx>
           {`
+            .user-profile {
+              max-width: 960px;
+              margin: 0 auto;
+              padding: 16px;
+            }
             .profile-top {
               display: flex;
-              margin: 18px 0;
+              margin-bottom: 32px;
             }
             .profile-pic {
               height: 80px;
               border-radius: 50%;
-              margin-right: 40px;
+              margin-right: 24px;
+            }
+            .name {
+              font-size: 34px;
+              font-weight: bold;
             }
             .username {
-              font-size: 36px;
-              font-weight: bold;
+              font-size: 24px;
+              font-weight: 500;
               margin-bottom: 4px;
             }
+            .bio {
+              margin-bottom: 16px;
+            }
             .views {
-              font-size: 18px;
+              margin-bottom: 32px;
             }
             .title {
               font-size: 12px;
               font-weight: bold;
               margin-bottom: 4px;
+            }
+            .bold {
+              font-weight: bold;
             }
           `}
         </style>

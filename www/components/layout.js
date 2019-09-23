@@ -13,7 +13,7 @@ const Layout = ({ children }) => {
       <div className="header">
         <Link href="/">
           <a className="logo">
-            <img height="45" src="/static/logo@2x.png" alt="profile.im" />
+            <img height="35" src="/static/logo@2x.png" alt="profile.im" />
           </a>
         </Link>
 
@@ -37,7 +37,7 @@ const Layout = ({ children }) => {
       <style jsx>
         {`
           .header {
-            padding: 32px;
+            padding: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -45,20 +45,14 @@ const Layout = ({ children }) => {
           .logo {
             text-decoration: none;
             color: black;
-            font-size: 25px;
             font-weight: bold;
           }
           logo:visited: {
             color: black;
           }
-          .main {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 32px;
-          }
           .profile-pic {
-            height: 45px;
-            width: 45px;
+            height: 35px;
+            width: 35px;
             border-radius: 50%;
           }
         `}

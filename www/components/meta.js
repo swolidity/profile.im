@@ -33,10 +33,14 @@ export default () => (
         margin: 0;
         padding: 0;
       }
-      body {
+      html,
+      body,
+      div#__next,
+      div#__next > div {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
           "Segoe UI Symbol";
+        height: 100%;
       }
     `}</style>
   </div>

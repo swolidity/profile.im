@@ -5,5 +5,7 @@ import YoutubeSearch from "../components/SpotifySearch";
 export default () => (
   <Layout>
     <YoutubeSearch />
+
+    <AddToProfile />
   </Layout>
 );
