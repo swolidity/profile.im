@@ -12,9 +12,7 @@ const Layout = ({ children }) => {
 
       <div className="header">
         <Link href="/">
-          <a className="logo">
-            <img height="35" src="/static/logo@2x.png" alt="profile.im" />
-          </a>
+          <a className="logo">Profile</a>
         </Link>
 
         {user ? (
@@ -41,10 +39,12 @@ const Layout = ({ children }) => {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: #fff;
           }
           .logo {
             text-decoration: none;
             color: black;
+            font-size: 25px;
             font-weight: bold;
           }
           logo:visited: {

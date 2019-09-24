@@ -32,6 +32,11 @@ const Answer = ({ answer }) => {
         {`
           .answer {
             margin-bottom: 18px;
+            padding: 16px;
+            border-radius: 5px;
+            background: #fff;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+              0 1px 2px 0 rgba(0, 0, 0, 0.06);
           }
           .answer a {
             text-decoration: none;
