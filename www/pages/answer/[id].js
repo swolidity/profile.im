@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import "isomorphic-unfetch";
-import Answer from "../../components/AnswerLarge";
+import Answer from "../../components/Answer";
 import Head from "next/head";
 
 const AnswerPage = ({ answer }) => (
@@ -17,7 +17,19 @@ const AnswerPage = ({ answer }) => (
 
       <meta property="og:image" content={answer.user.picture} />
     </Head>
-    <Answer answer={answer} />
+
+    <div className="answer-page">
+      <Answer answer={answer} />
+    </div>
+
+    <style jsx>
+      {`
+        .answer-page {
+          max-width: 960px;
+          margin: 0 auto;
+        }
+      `}
+    </style>
   </Layout>
 );
 AnswerPage.getInitialProps = async ({ query: { id } }) => {
