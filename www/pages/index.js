@@ -25,6 +25,7 @@ const Index = ({ users }) => (
         .center {
           text-align: center;
           overflow: auto;
+          margin-bottom: 32px;
         }
         .profiles-count {
           text-align: center;

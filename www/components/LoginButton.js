@@ -22,7 +22,6 @@ export default () => (
     <style jsx>{`
       .facebook-signup-button {
         display: inline-block;
-        margin-bottom: 32px;
         padding: 12px;
         background-color: #4c6ef5;
         border-radius: 5px;

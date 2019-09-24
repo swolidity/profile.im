@@ -8,32 +8,37 @@ const Users = ({ user, answers }) => {
     <Layout>
       <div className="user-profile">
         <div className="profile-top">
-          <img className="profile-pic" src={user.picture} alt={user.name} />
-          <div>
-            <div className="name">Andy Kay</div>
-            <div className="username">@{user.username}</div>
+          <div className="container">
+            <img className="profile-pic" src={user.picture} alt={user.name} />
+            <div>
+              <div className="name">Andy Kay</div>
+              <div className="username">@{user.username}</div>
+            </div>
           </div>
         </div>
 
-        <div className="bio">{user.bio}</div>
+        <div className="stuffs">
+          <div className="bio">{user.bio}</div>
 
-        <div className="views">
-          <span className="bold">{user.profile_views}</span> views
+          <div className="views">
+            <span className="bold">{user.profile_views}</span> views
+          </div>
+
+          {answers.map(answer => (
+            <Answer answer={answer} user={user} key={answer._id} />
+          ))}
         </div>
-
-        {answers.map(answer => (
-          <Answer answer={answer} user={user} key={answer._id} />
-        ))}
 
         <style jsx>
           {`
-            .user-profile {
+            .profile-top {
+              background: aliceblue;
+            }
+            .profile-top > .container {
               max-width: 960px;
               margin: 0 auto;
-              padding: 16px;
-            }
-            .profile-top {
               display: flex;
+              padding: 32px 16px;
               margin-bottom: 32px;
             }
             .profile-pic {
@@ -49,6 +54,11 @@ const Users = ({ user, answers }) => {
               font-size: 24px;
               font-weight: 500;
               margin-bottom: 4px;
+            }
+            .stuffs {
+              max-width: 960px;
+              margin: 0 auto;
+              padding: 16px;
             }
             .bio {
               margin-bottom: 16px;
