@@ -31,14 +31,15 @@ const Answer = ({ answer }) => {
       <style jsx>
         {`
           .answer {
-            margin-bottom: 18px;
             padding: 16px;
+            margin-bottom: 18px;
             border-radius: 5px;
             background: #fff;
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-              0 1px 2px 0 rgba(0, 0, 0, 0.06);
+              0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
           }
           .answer a {
+            font-size: 16px;
             text-decoration: none;
           }
           .question-header {
@@ -47,7 +48,7 @@ const Answer = ({ answer }) => {
             margin-bottom: 10px;
           }
           .question-header a {
-            color: #999;
+            color: #000;
           }
           .answer img {
             width: 80px;

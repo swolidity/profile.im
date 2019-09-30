@@ -40,6 +40,7 @@ const Layout = ({ children }) => {
             justify-content: space-between;
             align-items: center;
             background: #fff;
+            border-bottom: 1px solid #f8f8f8;
           }
           .logo {
             text-decoration: none;

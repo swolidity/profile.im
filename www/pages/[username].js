@@ -32,14 +32,12 @@ const Users = ({ user, answers }) => {
         <style jsx>
           {`
             .profile-top {
-              background: aliceblue;
             }
             .profile-top > .container {
-              max-width: 960px;
+              max-width: 600px;
               margin: 0 auto;
               display: flex;
               padding: 32px 16px;
-              margin-bottom: 32px;
             }
             .profile-pic {
               height: 80px;
@@ -56,7 +54,7 @@ const Users = ({ user, answers }) => {
               margin-bottom: 4px;
             }
             .stuffs {
-              max-width: 960px;
+              max-width: 600px;
               margin: 0 auto;
               padding: 16px;
             }
