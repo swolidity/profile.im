@@ -31,21 +31,19 @@ const Answer = ({ answer }) => {
       <style jsx>
         {`
           .answer {
-            padding: 16px;
-            margin-bottom: 18px;
-            border-radius: 5px;
+            margin-bottom: 32px;
             background: #fff;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-              0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
           }
           .answer a {
             font-size: 16px;
             text-decoration: none;
           }
           .question-header {
-            font-size: 12px;
+            font-size: 18px;
+            padding-bottom: 8px;
             font-weight: 600;
             margin-bottom: 10px;
+            border-bottom: 1px solid #f8f8f8;
           }
           .question-header a {
             color: #000;
