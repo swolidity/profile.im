@@ -6,10 +6,11 @@ const mongo = require("mongo");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const sanitizeHtml = require("sanitize-html");
-const linkifyUrls = require("linkify-urls");
 const got = require("got");
 const urlRegex = require("url-regex");
 const appendQuery = require("append-query");
+const slugify = require("@sindresorhus/slugify");
+const { extract } = require("oembed-parser");
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -39,37 +40,51 @@ app.post(
     const users = await usersCollection.find().toArray();
 
     const questionsCollection = await db.collection("questions");
-    const question = await questionsCollection.insert({
-      title: req.body.title
+    const question = await questionsCollection.insertOne({
+      title: req.body.title,
+      slug: slugify(req.body.title)
     });
 
     let item = req.body.item;
 
     let answerContent = item;
     let meta = null;
+    let oembed = null;
 
     if (!!item.match(urlRegex())) {
       const firstUrl = item.match(urlRegex())[0];
 
-      const { body: data } = await got(
-        `${process.env.API_URL}/meta?url=${firstUrl}`,
-        {
-          json: true,
-          headers: {
-            "User-Agent": req.headers["user-agent"]
-          }
+      try {
+        oembed = await extract(firstUrl);
+
+        if (oembed) {
+          oembed.url = firstUrl;
         }
-      );
-
-      meta = data;
-
-      // TODO: automatically add Amazon Affiliate ID
-      if (meta.publisher === "Amazon") {
-        meta.url = appendQuery(meta.url, { tag: "profiledotim-20" });
+      } catch (e) {
+        console.log(e);
       }
 
-      removeCardUrl = item.replace(firstUrl, "");
-      answerContent = linkifyUrls(removeCardUrl);
+      if (!oembed) {
+        try {
+          const { body: data } = await got(
+            `${process.env.API_URL}/meta?url=${firstUrl}`,
+            {
+              json: true,
+              headers: {
+                "User-Agent": req.headers["user-agent"]
+              }
+            }
+          );
+
+          meta = data;
+
+          if (meta.publisher === "Amazon") {
+            meta.url = appendQuery(meta.url, { tag: "profiledotim-20" });
+          }
+        } catch (e) {
+          console.log(e.message);
+        }
+      }
     }
 
     sanitizedAnswerContent = sanitizeHtml(answerContent, {
@@ -80,16 +95,13 @@ app.post(
     });
 
     const answersCollection = await db.collection("answers");
-    const answer = await answersCollection.insert({
+    const answer = await answersCollection.insertOne({
       user_id: req.user.user_id,
       question_id: question.ops[0]._id,
       title: question.ops[0].title,
-      items: [
-        {
-          content: sanitizedAnswerContent,
-          meta
-        }
-      ]
+      content: sanitizedAnswerContent,
+      meta,
+      oembed
     });
 
     res.send(answer.ops[0]);

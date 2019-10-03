@@ -31,6 +31,7 @@
     "react-async": "^8.0.0",
     "react-dom": "^16.9.0",
     "react-facebook-login": "^4.1.1",
+    "react-linkify": "^1.0.0-alpha",
     "react-spotify-api": "^2.4.0",
     "youtube-search": "^1.1.4"
   }

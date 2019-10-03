@@ -33,7 +33,7 @@ export default () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>Add to your profile</div>
+      <h2>Add to your profile</h2>
 
       <div>
         <input
@@ -55,6 +55,22 @@ export default () => {
       </div>
 
       <input type="submit" value="Add" />
+
+      <style jsx>
+        {`
+          h2 {
+            margin-bottom: 16px;
+          }
+          input {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 5px;
+            border: 2px solid #f8f8f8;
+            padding: 8px;
+            font-size: 16px;
+          }
+        `}
+      </style>
     </form>
   );
 };

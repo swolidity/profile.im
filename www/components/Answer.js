@@ -1,23 +1,8 @@
 import Link from "next/link";
-import ProfileSong from "./ProfileSong";
-import Quote from "./Quote";
-import Instagram from "./Instagram";
-import Twitter from "./Twitter";
-import GitHub from "./GitHub";
-import Facebook from "./Facebook";
-
-const components = {
-  profileSong: ProfileSong,
-  quote: Quote,
-  instagram: Instagram,
-  twitter: Twitter,
-  github: GitHub,
-  facebook: Facebook
-};
+import Linkify from "react-linkify";
+import Card from "./Card";
 
 const Answer = ({ answer }) => {
-  const ProfileComponent = components[answer.type];
-
   return (
     <div className="answer">
       <div className="question-header">
@@ -26,7 +11,11 @@ const Answer = ({ answer }) => {
         </Link>
       </div>
 
-      <ProfileComponent item={answer} />
+      <div className="content">
+        <Linkify properties={{ target: "_blank" }}>{answer.content}</Linkify>
+      </div>
+
+      {answer.oembed ? <Card data={answer.oembed} /> : null}
 
       <style jsx>
         {`
@@ -53,14 +42,9 @@ const Answer = ({ answer }) => {
             height: 80px;
             margin-right: 16px;
           }
-          .card {
-            display: flex;
-          }
-          .card box {
-            display: flex;
-          }
+
           .content {
-            padding: 8px 8px 8px 0;
+            margin-bottom: 8px;
           }
           .content-title {
             margin-bottom: 6px;

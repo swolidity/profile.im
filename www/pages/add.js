@@ -1,11 +1,17 @@
 import Layout from "../components/Layout";
 import AddToProfile from "../components/AddToProfile";
-import YoutubeSearch from "../components/SpotifySearch";
 
 export default () => (
   <Layout>
-    <YoutubeSearch />
-
-    <AddToProfile />
+    <div className="add">
+      <AddToProfile />
+    </div>
+    <style jsx>
+      {`
+        .add {
+          padding: 16px;
+        }
+      `}
+    </style>
   </Layout>
 );
