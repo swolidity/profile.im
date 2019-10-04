@@ -2,7 +2,7 @@ import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookSquare } from "@fortawesome/free-brands-svg-icons";
 
-export default () => (
+export default ({ buttonText = "Sign Up with Facebook" }) => (
   <div className="facebook-signup-button">
     <FacebookLogin
       appId={process.env.FACEBOOK_APP_ID}
@@ -14,7 +14,7 @@ export default () => (
           <span className="facebook-icon">
             <FontAwesomeIcon icon={faFacebookSquare} />
           </span>{" "}
-          Sign Up with Facebook
+          {buttonText}
         </div>
       )}
     />

@@ -2,8 +2,11 @@ import Link from "next/link";
 import Linkify from "react-linkify";
 import Card from "./Card";
 import AnswerBy from "./AnswerBy";
+import { useLoggedInUser } from "../hooks/useLoggedInUser";
 
 const Answer = ({ answer }) => {
+  const loggedInUser = useLoggedInUser();
+
   return (
     <div>
       <div className="answer">
@@ -22,9 +25,15 @@ const Answer = ({ answer }) => {
         {answer.oembed ? <Card data={answer.oembed} /> : null}
       </div>
 
-      <a className="add-answer-button" href="#">
-        Answer this question
-      </a>
+      {loggedInUser._id === answer.user._id ? (
+        <Link href="/question/[id]" as={`/question/${answer.question_id}`}>
+          <a className="add-answer-button">Edit answer</a>
+        </Link>
+      ) : (
+        <Link href="/question/[id]" as={`/question/${answer.question_id}`}>
+          <a className="add-answer-button">Answer this question</a>
+        </Link>
+      )}
 
       <style jsx>
         {`

@@ -13,15 +13,13 @@ class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
     const { jwt } = cookies(ctx);
 
     let user = null;
 
     if (jwt) {
+      ctx.jwt = jwt;
+
       const res = await fetch(`${process.env.API_URL}/auth`, {
         headers: {
           Accept: "application/json",
@@ -33,6 +31,10 @@ class MyApp extends App {
       });
 
       user = await res.json();
+    }
+
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
     }
 
     return { pageProps, user };
