@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Linkify from "react-linkify";
 import Card from "./Card";
+import { formatDistanceToNow } from "date-fns";
 
 const Answer = ({ answer }) => {
   return (
@@ -9,6 +10,10 @@ const Answer = ({ answer }) => {
         <Link href="/answer/[id]" as={`/answer/${answer._id}`}>
           <a>{answer.title}</a>
         </Link>
+
+        <div className="created_at">
+          {formatDistanceToNow(new Date(answer.created_at))}
+        </div>
       </div>
 
       <div className="content">
@@ -22,6 +27,10 @@ const Answer = ({ answer }) => {
           .answer {
             margin-bottom: 32px;
             background: #fff;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+              0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+            padding: 16px;
+            border-radius: 5px;
           }
           .answer a {
             font-size: 16px;
@@ -36,6 +45,10 @@ const Answer = ({ answer }) => {
           }
           .question-header a {
             color: #000;
+          }
+          .created_at {
+            font-size: 12px;
+            font-weight: 400;
           }
           .answer img {
             width: 80px;

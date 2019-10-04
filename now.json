@@ -20,6 +20,10 @@
       "dest": "/api/routes/user_profile/index.js?username=$username"
     },
     {
+      "src": "/api/question/(?<id>[^/]+)$",
+      "dest": "/api/routes/question/index.js?id=$id"
+    },
+    {
       "src": "/api/answer/(?<id>[^/]+)$",
       "dest": "/api/routes/answer/index.js?id=$id"
     },

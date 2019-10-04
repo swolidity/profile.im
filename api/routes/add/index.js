@@ -42,7 +42,9 @@ app.post(
     const questionsCollection = await db.collection("questions");
     const question = await questionsCollection.insertOne({
       title: req.body.title,
-      slug: slugify(req.body.title)
+      slug: slugify(req.body.title),
+      user_id: req.user.user_id,
+      created_at: new Date()
     });
 
     let item = req.body.item;
@@ -101,7 +103,8 @@ app.post(
       title: question.ops[0].title,
       content: sanitizedAnswerContent,
       meta,
-      oembed
+      oembed,
+      created_at: new Date()
     });
 
     res.send(answer.ops[0]);

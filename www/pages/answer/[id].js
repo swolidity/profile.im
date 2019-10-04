@@ -1,6 +1,6 @@
 import Layout from "../../components/Layout";
 import "isomorphic-unfetch";
-import Answer from "../../components/Answer";
+import AnswerLarge from "../../components/AnswerLarge";
 import Head from "next/head";
 
 const AnswerPage = ({ answer }) => (
@@ -19,13 +19,14 @@ const AnswerPage = ({ answer }) => (
     </Head>
 
     <div className="answer-page">
-      <Answer answer={answer} />
+      <AnswerLarge answer={answer} />
     </div>
 
     <style jsx>
       {`
         .answer-page {
-          max-width: 960px;
+          padding-top: 32px;
+          max-width: 600px;
           margin: 0 auto;
         }
       `}
