@@ -48,12 +48,17 @@ app.get(
     let loggedInUserAnswer;
 
     if (req.user) {
-      loggedInUserAnswer = await db
-        .collection("answers")
-        .findOne({
-          question_id: new ObjectID(question._id),
-          user_id: req.user._id
-        });
+      loggedInUserAnswer = await db.collection("answers").findOne({
+        question_id: new ObjectID(question._id),
+        user_id: new ObjectID(req.user.user_id)
+      });
+
+      if (loggedInUserAnswer) {
+        const user = await db
+          .collection("users")
+          .findOne({ _id: new ObjectID(req.user.user_id) });
+        loggedInUserAnswer.user = user;
+      }
     }
 
     res.send({ question, loggedInUserAnswer });

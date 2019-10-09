@@ -28,6 +28,10 @@
       "dest": "/api/routes/answer/index.js?id=$id"
     },
     {
+      "src": "/api/pages/",
+      "dest": "/api/routes/pages"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/routes/$1"
     },

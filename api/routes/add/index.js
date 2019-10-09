@@ -11,6 +11,7 @@ const urlRegex = require("url-regex");
 const appendQuery = require("append-query");
 const slugify = require("@sindresorhus/slugify");
 const { extract } = require("oembed-parser");
+const ObjectID = require("mongodb").ObjectID;
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -43,7 +44,7 @@ app.post(
     const question = await questionsCollection.insertOne({
       title: req.body.title,
       slug: slugify(req.body.title),
-      user_id: req.user.user_id,
+      user_id: new ObjectID(req.user.user_id()),
       created_at: new Date()
     });
 
@@ -98,8 +99,8 @@ app.post(
 
     const answersCollection = await db.collection("answers");
     const answer = await answersCollection.insertOne({
-      user_id: req.user.user_id,
-      question_id: question.ops[0]._id,
+      user_id: new ObjectID(req.user.user_id),
+      question_id: new ObjectID(question.ops[0]._id),
       title: question.ops[0].title,
       content: sanitizedAnswerContent,
       meta,

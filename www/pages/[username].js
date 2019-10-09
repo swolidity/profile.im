@@ -1,9 +1,13 @@
 import "isomorphic-unfetch";
 import Layout from "../components/Layout";
+import { useLoggedInUser } from "../hooks/useLoggedInUser";
+import AddPageModal from "../components/AddPageModal";
 
-import Answer from "../components/Answer";
+const Users = ({ user, pages }) => {
+  const loggedInUser = useLoggedInUser();
 
-const Users = ({ user, answers }) => {
+  console.log("pages", pages);
+
   return (
     <Layout>
       <div className="user-profile">
@@ -24,9 +28,17 @@ const Users = ({ user, answers }) => {
             <span className="bold">{user.profile_views}</span> views
           </div>
 
-          {answers.map(answer => (
-            <Answer answer={answer} user={user} key={answer._id} />
-          ))}
+          {loggedInUser && loggedInUser._id === user._id ? (
+            <AddPageModal />
+          ) : null}
+
+          <div className="pages">
+            {pages.map(page => (
+              <div className="page" key={page._id}>
+                <div className="page-title">{page.title}</div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <style jsx>
@@ -72,6 +84,19 @@ const Users = ({ user, answers }) => {
             .bold {
               font-weight: bold;
             }
+            .page {
+              margin-bottom: 32px;
+              background: #fff;
+              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+                0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
+              padding: 16px;
+              border-radius: 5px;
+              cursor: pointer;
+            }
+            .page-title {
+              font-weight: 500;
+              font-size: 28px;
+            }
           `}
         </style>
       </div>
@@ -81,9 +106,7 @@ const Users = ({ user, answers }) => {
 
 Users.getInitialProps = async ({ query: { username } }) => {
   const res = await fetch(`${process.env.API_URL}/user_profile/${username}`);
-  const json = await res.json();
-
-  return { user: json.user, answers: json.answers };
+  return await res.json();
 };
 
 export default Users;

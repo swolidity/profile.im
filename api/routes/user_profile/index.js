@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const app = express();
 const json = require("body-parser").json;
 const mongo = require("mongo");
+const ObjectID = require("mongodb").ObjectID;
 
 // add some security-related headers to the response
 app.use(helmet());
@@ -26,13 +27,12 @@ app.get("*", async (req, res) => {
     { upsert: true }
   );
 
-  const answersCollection = await db.collection("answers");
-
-  const answers = await answersCollection
-    .find({ user_id: user._id.toString() })
+  const pages = await db
+    .collection("pages")
+    .find({ user_id: new ObjectID(user._id) })
     .toArray();
 
-  res.send({ user, answers });
+  res.send({ user, pages });
 });
 
 module.exports = app;
