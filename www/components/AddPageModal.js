@@ -13,15 +13,22 @@ import {
 import { Formik, Field } from "formik";
 import { useFetch } from "react-async";
 
-export default () => {
+export default ({ onAddPage }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { data, error, isPending, run } = useFetch(
+  const { error, isPending, run } = useFetch(
     `${process.env.API_URL}/pages`,
     {
       headers: {
         "Content-Type": "application/json"
       },
       method: "POST"
+    },
+    {
+      onResolve: async res => {
+        const newPage = await res.json();
+
+        onAddPage(newPage);
+      }
     }
   );
 

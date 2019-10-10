@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "isomorphic-unfetch";
 import Layout from "../components/Layout";
 import { useLoggedInUser } from "../hooks/useLoggedInUser";
@@ -5,8 +6,11 @@ import AddPageModal from "../components/AddPageModal";
 
 const Users = ({ user, pages }) => {
   const loggedInUser = useLoggedInUser();
+  const [pagesState, setPagesState] = useState(pages);
 
-  console.log("pages", pages);
+  const handleAddPage = newPage => {
+    setPagesState([...pagesState, newPage]);
+  };
 
   return (
     <Layout>
@@ -29,11 +33,11 @@ const Users = ({ user, pages }) => {
           </div>
 
           {loggedInUser && loggedInUser._id === user._id ? (
-            <AddPageModal />
+            <AddPageModal onAddPage={handleAddPage} />
           ) : null}
 
           <div className="pages">
-            {pages.map(page => (
+            {pagesState.map(page => (
               <div className="page" key={page._id}>
                 <div className="page-title">{page.title}</div>
               </div>
