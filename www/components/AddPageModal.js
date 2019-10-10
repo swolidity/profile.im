@@ -8,7 +8,8 @@ import {
   ModalCloseButton,
   useDisclosure,
   Button,
-  Input
+  Input,
+  Textarea
 } from "@chakra-ui/core";
 import { Formik, Field } from "formik";
 import { useFetch } from "react-async";
@@ -35,13 +36,13 @@ export default ({ onAddPage }) => {
   return (
     <>
       <Button onClick={onOpen} mb={4}>
-        Add Page
+        Add To Profile
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Add Page</ModalHeader>
+          <ModalHeader>Add To Profile</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Formik
@@ -58,7 +59,20 @@ export default ({ onAddPage }) => {
                       <Input
                         {...field}
                         id="title"
-                        placeholder="Write something cool here..."
+                        placeholder="Title"
+                        size="lg"
+                        mb={4}
+                      />
+                    )}
+                  />
+
+                  <Field
+                    name="content"
+                    render={({ field, form }) => (
+                      <Textarea
+                        {...field}
+                        id="content"
+                        placeholder="cool story bro..."
                         size="lg"
                       />
                     )}

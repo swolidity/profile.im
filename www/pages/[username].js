@@ -3,6 +3,9 @@ import "isomorphic-unfetch";
 import Layout from "../components/Layout";
 import { useLoggedInUser } from "../hooks/useLoggedInUser";
 import AddPageModal from "../components/AddPageModal";
+import Link from "next/link";
+import Linkify from "react-linkify";
+import Card from "../components/Card";
 
 const Users = ({ user, pages }) => {
   const loggedInUser = useLoggedInUser();
@@ -26,8 +29,6 @@ const Users = ({ user, pages }) => {
         </div>
 
         <div className="stuffs">
-          <div className="bio">{user.bio}</div>
-
           <div className="views">
             <span className="bold">{user.profile_views}</span> views
           </div>
@@ -39,7 +40,19 @@ const Users = ({ user, pages }) => {
           <div className="pages">
             {pagesState.map(page => (
               <div className="page" key={page._id}>
-                <div className="page-title">{page.title}</div>
+                <div>
+                  <Link
+                    href="/[username]/p/[slug]"
+                    as={`/${user.username}/p/${page.slug}`}
+                  >
+                    <a className="page-title">{page.title}:</a>
+                  </Link>
+                </div>
+                <Linkify properties={{ target: "_blank" }}>
+                  {page.content}
+                </Linkify>
+
+                {page.oembed ? <Card data={page.oembed} /> : null}
               </div>
             ))}
           </div>
@@ -73,9 +86,6 @@ const Users = ({ user, pages }) => {
               max-width: 600px;
               margin: 0 auto;
               padding: 16px;
-            }
-            .bio {
-              margin-bottom: 16px;
             }
             .views {
               margin-bottom: 32px;
