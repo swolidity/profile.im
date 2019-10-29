@@ -46,6 +46,8 @@ const Post = ({ user, post }) => {
           content={`${user.username}: ${postState.title}`}
         />
 
+        <meta property="og:description" content={postState.description} />
+
         <meta property="og:image" content={user.picture} />
       </Head>
 
@@ -68,6 +70,8 @@ const Post = ({ user, post }) => {
               {formatDistanceToNow(new Date(post.created_at))} ago
             </Box>
           </Flex>
+
+          <Text mb={4}>{post.description}</Text>
 
           {postState.type === "list" && loggedInUser ? (
             <AddItemToListModal
