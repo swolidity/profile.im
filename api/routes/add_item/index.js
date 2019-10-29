@@ -72,7 +72,11 @@ app.post(
           meta = data;
 
           if (meta.publisher === "Amazon") {
-            meta.url = appendQuery(meta.url, { tag: "profiledotim-20" });
+            const affiliateURL = appendQuery(meta.url, {
+              tag: "profiledotim-20"
+            });
+            meta.url = affiliateURL;
+            content.replace(urlRegex()[0], affiliateURL);
           }
         } catch (e) {
           console.log(e.message);

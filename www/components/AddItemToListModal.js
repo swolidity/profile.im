@@ -14,7 +14,7 @@ import {
 import { Formik, Field } from "formik";
 import { useFetch } from "react-async";
 
-export default ({ onAddPost, postID }) => {
+export default ({ onAddItem, postID }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { error, isPending, run } = useFetch(
     `${process.env.API_URL}/add_item`,
@@ -26,9 +26,9 @@ export default ({ onAddPost, postID }) => {
     },
     {
       onResolve: async res => {
-        const newPost = await res.json();
+        const newItem = await res.json();
 
-        onAddPost(newPost);
+        onAddItem(newItem);
       }
     }
   );

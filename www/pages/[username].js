@@ -47,7 +47,7 @@ const Users = ({ user, posts }) => {
             <AddPostModal onAddPost={handleAddPost} />
           ) : null}
 
-          <PostList user={user} posts={posts} />
+          <PostList user={user} posts={postsState} />
         </div>
 
         <style jsx>
