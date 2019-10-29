@@ -2,7 +2,12 @@ import Meta from "./meta";
 import Link from "next/link";
 import LoginButton from "./LoginButton";
 import { useLoggedInUser } from "../hooks/useLoggedInUser";
-import { ThemeProvider, ColorModeProvider, CSSReset } from "@chakra-ui/core";
+import {
+  ThemeProvider,
+  ColorModeProvider,
+  CSSReset,
+  theme
+} from "@chakra-ui/core";
 
 const Layout = ({ children }) => {
   const user = useLoggedInUser();
@@ -31,7 +36,7 @@ const Layout = ({ children }) => {
         )}
       </div>
 
-      <ThemeProvider>
+      <ThemeProvider theme={theme}>
         <CSSReset />
         <ColorModeProvider>
           <main className="main">{children}</main>

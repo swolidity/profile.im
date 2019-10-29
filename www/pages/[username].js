@@ -4,18 +4,12 @@ import Layout from "../components/Layout";
 import { useLoggedInUser } from "../hooks/useLoggedInUser";
 import AddPostModal from "../components/AddPostModal";
 import Link from "next/link";
-import Linkify from "react-linkify";
-import Card from "../components/Card";
+
 import { Flex, Box, Tag, Heading, Text, Avatar, Stack } from "@chakra-ui/core";
-import { formatDistanceToNow } from "date-fns";
 
-const LinkifyComponentDecorator = (href, text, key) => (
-  <a href={href} key={key} target="_blank" className="linkified">
-    {text}
-  </a>
-);
+import PostList from "../components/PostList";
 
-const Users = ({ user, pages: posts }) => {
+const Users = ({ user, posts }) => {
   const loggedInUser = useLoggedInUser();
   const [postsState, setPostsState] = useState(posts);
 
@@ -53,40 +47,7 @@ const Users = ({ user, pages: posts }) => {
             <AddPostModal onAddPost={handleAddPost} />
           ) : null}
 
-          <Stack spacing={3}>
-            {postsState.map(post => (
-              <Box shadow="sm" rounded="md" p={2} key={post._id}>
-                <Box>
-                  <Heading size="sm">
-                    <Link
-                      href="/[username]/p/[slug]"
-                      as={`/${user.username}/p/${post.slug}`}
-                    >
-                      <a className="post-title">{post.title}</a>
-                    </Link>
-                  </Heading>
-                </Box>
-
-                <Box className="createdAt" mb={2}>
-                  {formatDistanceToNow(new Date(post.created_at))} ago
-                </Box>
-
-                <Box mb={4}>{post.description}</Box>
-
-                <Box className="content" mb={2}>
-                  <Text>
-                    <Linkify componentDecorator={LinkifyComponentDecorator}>
-                      {post.content}
-                    </Linkify>
-                  </Text>
-                </Box>
-
-                <Box mb={2}>
-                  {post.oembed ? <Card data={post.oembed} /> : null}
-                </Box>
-              </Box>
-            ))}
-          </Stack>
+          <PostList user={user} posts={posts} />
         </div>
 
         <style jsx>

@@ -99,11 +99,16 @@ app.post(
       }
     });
 
-    const post = await db.collection("posts").insertOne({
+    let post;
+
+    post = await db.collection("posts").insertOne({
       user_id: new ObjectID(req.user.user_id),
       title: input.title,
-      content: input.content,
+      description: input.description,
       slug: slugify(input.title),
+      type: input.type,
+      items: 1,
+      content: input.content,
       created_at: new Date(),
       meta,
       oembed

@@ -27,12 +27,12 @@ app.get("*", async (req, res) => {
     { upsert: true }
   );
 
-  const pages = await db
+  const posts = await db
     .collection("posts")
     .find({ user_id: new ObjectID(user._id) })
     .toArray();
 
-  res.send({ user, pages });
+  res.send({ user: user, posts: posts });
 });
 
 module.exports = app;

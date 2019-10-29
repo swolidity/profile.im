@@ -11,9 +11,24 @@ app.use(json());
 
 app.get("*", async (req, res) => {
   const db = await mongo();
-  const item = await db.collection("items").findOne({ slug: req.query.slug });
+  const post = await db.collection("posts").findOne({ slug: req.query.slug });
 
-  res.send({ user, item });
+  const user = await db
+    .collection("users")
+    .findOne({ _id: new ObjectID(post.user_id) });
+
+  post.items = [];
+
+  if (post.type === "list") {
+    const items = await db
+      .collection("items")
+      .find({ post_id: post._id })
+      .toArray();
+
+    post.items = items;
+  }
+
+  res.send({ user, post });
 });
 
 module.exports = app;

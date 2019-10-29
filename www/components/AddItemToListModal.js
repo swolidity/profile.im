@@ -14,10 +14,10 @@ import {
 import { Formik, Field } from "formik";
 import { useFetch } from "react-async";
 
-export default ({ onAddPost }) => {
+export default ({ onAddPost, postID }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { error, isPending, run } = useFetch(
-    `${process.env.API_URL}/posts`,
+    `${process.env.API_URL}/add_item`,
     {
       headers: {
         "Content-Type": "application/json"
@@ -46,7 +46,12 @@ export default ({ onAddPost }) => {
           <ModalCloseButton />
           <ModalBody>
             <Formik
-              initialValues={{ title: "", description: "", content: "" }}
+              initialValues={{
+                post_id: postID,
+                title: "",
+                description: "",
+                content: ""
+              }}
               onSubmit={(values, actions) => {
                 run({ body: JSON.stringify(values) });
               }}
