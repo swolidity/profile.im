@@ -54,6 +54,7 @@ export default ({ onAddItem, postID }) => {
               }}
               onSubmit={(values, actions) => {
                 run({ body: JSON.stringify(values) });
+                onClose();
               }}
               render={props => (
                 <form onSubmit={props.handleSubmit}>
