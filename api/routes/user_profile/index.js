@@ -28,7 +28,7 @@ app.get("*", async (req, res) => {
   );
 
   const pages = await db
-    .collection("components")
+    .collection("posts")
     .find({ user_id: new ObjectID(user._id) })
     .toArray();
 

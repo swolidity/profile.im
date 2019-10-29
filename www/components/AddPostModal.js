@@ -14,10 +14,10 @@ import {
 import { Formik, Field } from "formik";
 import { useFetch } from "react-async";
 
-export default ({ onAddPage }) => {
+export default ({ onAddPost }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { error, isPending, run } = useFetch(
-    `${process.env.API_URL}/pages`,
+    `${process.env.API_URL}/posts`,
     {
       headers: {
         "Content-Type": "application/json"
@@ -26,9 +26,9 @@ export default ({ onAddPage }) => {
     },
     {
       onResolve: async res => {
-        const newPage = await res.json();
+        const newPost = await res.json();
 
-        onAddPage(newPage);
+        onAddPost(newPost);
       }
     }
   );
@@ -46,9 +46,8 @@ export default ({ onAddPage }) => {
           <ModalCloseButton />
           <ModalBody>
             <Formik
-              initialValues={{ title: "" }}
+              initialValues={{ title: "", description: "", content: "" }}
               onSubmit={(values, actions) => {
-                console.log("values", values);
                 run({ body: JSON.stringify(values) });
               }}
               render={props => (
@@ -60,6 +59,19 @@ export default ({ onAddPage }) => {
                         {...field}
                         id="title"
                         placeholder="Title"
+                        size="lg"
+                        mb={4}
+                      />
+                    )}
+                  />
+
+                  <Field
+                    name="description"
+                    render={({ field, form }) => (
+                      <Input
+                        {...field}
+                        id="description"
+                        placeholder="Description"
                         size="lg"
                         mb={4}
                       />

@@ -23,11 +23,11 @@ app.get("*", async (req, res) => {
 
   const user_id = req.params.user_id;
 
-  const pages = await db
-    .collection("components")
+  const posts = await db
+    .collection("posts")
     .find({ user_id: new ObjectID(user_id) });
 
-  res.send(pages.ops[0]);
+  res.send(posts.ops[0]);
 });
 
 app.post(
@@ -99,7 +99,7 @@ app.post(
       }
     });
 
-    const page = await db.collection("components").insertOne({
+    const post = await db.collection("posts").insertOne({
       user_id: new ObjectID(req.user.user_id),
       title: input.title,
       content: input.content,
@@ -109,7 +109,7 @@ app.post(
       oembed
     });
 
-    res.send(page.ops[0]);
+    res.send(post.ops[0]);
   }
 );
 

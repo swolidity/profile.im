@@ -2,118 +2,108 @@ import { useState } from "react";
 import "isomorphic-unfetch";
 import Layout from "../components/Layout";
 import { useLoggedInUser } from "../hooks/useLoggedInUser";
-import AddPageModal from "../components/AddPageModal";
+import AddPostModal from "../components/AddPostModal";
 import Link from "next/link";
 import Linkify from "react-linkify";
 import Card from "../components/Card";
+import { Flex, Box, Tag, Heading, Text, Avatar, Stack } from "@chakra-ui/core";
+import { formatDistanceToNow } from "date-fns";
 
-const Users = ({ user, pages }) => {
+const LinkifyComponentDecorator = (href, text, key) => (
+  <a href={href} key={key} target="_blank" className="linkified">
+    {text}
+  </a>
+);
+
+const Users = ({ user, pages: posts }) => {
   const loggedInUser = useLoggedInUser();
-  const [pagesState, setPagesState] = useState(pages);
+  const [postsState, setPostsState] = useState(posts);
 
-  const handleAddPage = newPage => {
-    setPagesState([...pagesState, newPage]);
+  const handleAddPost = newPost => {
+    setPostsState([...postsState, newPost]);
   };
 
   return (
     <Layout>
-      <div className="user-profile">
-        <div className="profile-top">
+      <Box p={6}>
+        <Box className="profile-top" mb={6}>
           <div className="container">
-            <img className="profile-pic" src={user.picture} alt={user.name} />
-            <div>
-              <div className="name">Andy Kay</div>
-              <div className="username">@{user.username}</div>
-            </div>
-          </div>
-        </div>
+            <Flex align="center">
+              <Box mr={8}>
+                <Avatar
+                  src={user.picture}
+                  alt={user.name}
+                  rounded="full"
+                  size="lg"
+                />
+              </Box>
 
-        <div className="stuffs">
-          <div className="views">
-            <span className="bold">{user.profile_views}</span> views
+              <Box>
+                <Heading size="md">Andy Kay</Heading>
+                <Text>@{user.username}</Text>
+              </Box>
+            </Flex>
           </div>
+        </Box>
+
+        <div className="container">
+          <Text>{user.profile_views} views</Text>
 
           {loggedInUser && loggedInUser._id === user._id ? (
-            <AddPageModal onAddPage={handleAddPage} />
+            <AddPostModal onAddPost={handleAddPost} />
           ) : null}
 
-          <div className="pages">
-            {pagesState.map(page => (
-              <div className="page" key={page._id}>
-                <div>
-                  <Link
-                    href="/[username]/p/[slug]"
-                    as={`/${user.username}/p/${page.slug}`}
-                  >
-                    <a className="page-title">{page.title}:</a>
-                  </Link>
-                </div>
-                <Linkify properties={{ target: "_blank" }}>
-                  {page.content}
-                </Linkify>
+          <Stack spacing={3}>
+            {postsState.map(post => (
+              <Box shadow="sm" rounded="md" p={2} key={post._id}>
+                <Box>
+                  <Heading size="sm">
+                    <Link
+                      href="/[username]/p/[slug]"
+                      as={`/${user.username}/p/${post.slug}`}
+                    >
+                      <a className="post-title">{post.title}</a>
+                    </Link>
+                  </Heading>
+                </Box>
 
-                {page.oembed ? <Card data={page.oembed} /> : null}
-              </div>
+                <Box className="createdAt" mb={2}>
+                  {formatDistanceToNow(new Date(post.created_at))} ago
+                </Box>
+
+                <Box mb={4}>{post.description}</Box>
+
+                <Box className="content" mb={2}>
+                  <Text>
+                    <Linkify componentDecorator={LinkifyComponentDecorator}>
+                      {post.content}
+                    </Linkify>
+                  </Text>
+                </Box>
+
+                <Box mb={2}>
+                  {post.oembed ? <Card data={post.oembed} /> : null}
+                </Box>
+              </Box>
             ))}
-          </div>
+          </Stack>
         </div>
 
         <style jsx>
           {`
-            .profile-top {
+            :global(.linkified) {
+              color: #0366d6;
             }
-            .profile-top > .container {
+            .container {
               max-width: 600px;
               margin: 0 auto;
-              display: flex;
-              padding: 32px 16px;
             }
-            .profile-pic {
-              height: 80px;
-              border-radius: 50%;
-              margin-right: 24px;
-            }
-            .name {
-              font-size: 34px;
-              font-weight: bold;
-            }
-            .username {
-              font-size: 24px;
-              font-weight: 500;
-              margin-bottom: 4px;
-            }
-            .stuffs {
-              max-width: 600px;
-              margin: 0 auto;
-              padding: 16px;
-            }
-            .views {
-              margin-bottom: 32px;
-            }
-            .title {
-              font-size: 12px;
-              font-weight: bold;
-              margin-bottom: 4px;
-            }
-            .bold {
-              font-weight: bold;
-            }
-            .page {
-              margin-bottom: 32px;
-              background: #fff;
-              box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
-                0 1px 2px 0 rgba(0, 0, 0, 0.06) !important;
-              padding: 16px;
-              border-radius: 5px;
-              cursor: pointer;
-            }
-            .page-title {
-              font-weight: 500;
-              font-size: 28px;
+            :global(a) {
+              word-wrap: break-word;
             }
           `}
         </style>
-      </div>
+      </Box>
     </Layout>
   );
 };
