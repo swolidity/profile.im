@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
 
       <ThemeProvider theme={theme}>
         <CSSReset />
-        <ColorModeProvider>
+        <ColorModeProvider value="light">
           <main className="main">{children}</main>
         </ColorModeProvider>
       </ThemeProvider>
